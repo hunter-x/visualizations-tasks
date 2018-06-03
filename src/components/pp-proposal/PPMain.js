@@ -22,7 +22,7 @@ export default class PPMain extends Component {
 
         <div className='container topTitle' >
           <div className='row col-md-12'  >
-            <Card img="card2.jpg" redirectLink="/municipal-turnout18" title={TITLECARD} description={DESC_CARD} />
+            <Card img="munturnout18.jpg" redirectLink="/municipal-turnout18" title={TITLECARD} description={DESC_CARD} />
           </div>
           
         </div>

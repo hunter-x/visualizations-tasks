@@ -11,8 +11,8 @@ const Nav = () => (
     <nav id="slide-menu">
         <ul>
         <Link to='/'><li>{HOME}</li></Link>
-        <Link to='/pp-proposal'><li>{ONETOONE}</li></Link>
-        <Link to='/one-to-one'><li>{POLITICALPARTYPROP}</li></Link>
+        <Link to='/pp-proposal'><li>{POLITICALPARTYPROP}</li></Link>
+        <Link to='/one-to-one'><li>{ONETOONE}</li></Link>
         </ul>
     </nav>
 );

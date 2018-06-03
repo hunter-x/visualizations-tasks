@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import Translate from 'react-translate-component';
 import Menu from '../shared/Menu';
 import Card from '../shared/Card';
-import counterpart  from 'counterpart';
+import counterpart from 'counterpart';
 
 export default class RootHome extends Component {
   constructor(props) {
     super(props);
     this.state = { menuStyle: true, chosenViz: 'boxes', mapZIndex: 150 }
   }
-  
+
   render() {
     let menuStyle = ''; this.state.menuStyle ? menuStyle = '' : menuStyle = 'nav-active'
     let { chosenViz } = this.state;
@@ -34,9 +34,9 @@ export default class RootHome extends Component {
         </div>
 
         <div className='container topTitle' >
-          <div className='row col-md-12' style={{zIndex:this.state.mapZIndex}} >
-            <Card img="card1.jpg" redirectLink="/one-to-one" title={TITLECARD} description={DESC_CARD} />
+          <div className='row col-md-12' style={{ zIndex: this.state.mapZIndex }} >
             <Card img="card2.jpg" redirectLink="/pp-proposal" title={TITLECARD2} description={DESC_CARD2} />
+            <Card img="card1.jpg" redirectLink="/one-to-one" title={TITLECARD} description={DESC_CARD} />
           </div>
 
         </div>

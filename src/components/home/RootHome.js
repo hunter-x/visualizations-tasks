@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Translate from 'react-translate-component';
-import Menu from '../menu/Menu';
-import Card from './Card';
+import Menu from '../shared/Menu';
+import Card from '../shared/Card';
 import counterpart  from 'counterpart';
 
 export default class RootHome extends Component {
@@ -50,7 +50,7 @@ export default class RootHome extends Component {
             <Card img="card1.jpg" redirectLink="/one-to-one" title={TITLECARD} description={DESC_CARD} />
             <Card img="card2.jpg" redirectLink="/pp-proposal" title={TITLECARD2} description={DESC_CARD2} />
           </div>
-          
+
         </div>
       </section>
     );

@@ -27,7 +27,7 @@ export default class _RootMunTurnout extends Component {
         <Menu />
         <Nav/>
         <div id="content">
-          <div class="menu-trigger"></div>
+          <div className="menu-trigger"></div>
           <div className="site-content">
             <h1 className="site-content__headline">{TITLE}</h1>
           </div>

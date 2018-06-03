@@ -15,8 +15,8 @@ export default class MunTurnoutMap extends Component {
     this.state = {
       shapeIsLoaded: false, shape: config.initShape, key: 1,
       filter: 'citizen', checked: [true, false, false, false, false],
-      grades: [0,30000, 45000], keyTitle: 'Number of citizens',
-      nom:'',population_number:'',field:'',salle:'',atheletic:'',complex:''
+      grades: [0, 30, 35], keyTitle: 'Number of citizens',
+      nom: '', population_number: '', field: '', salle: '', atheletic: '', complex: ''
     }
   }
 
@@ -47,11 +47,11 @@ export default class MunTurnoutMap extends Component {
     checked[parseInt(e.target.value)] = true;
     let GRADES, keyTitle;
     if (filter == 'citizen') {
-      GRADES = [0,30000, 45000];
+      GRADES = [0, 30000, 45000];
       keyTitle = <Translate type='text' content='mapKey.citizen' />
     } else if (filter == 'complex') {
       GRADES = [0, 1, 2];
-      keyTitle =<Translate type='text' content='mapKey.complex' />
+      keyTitle = <Translate type='text' content='mapKey.complex' />
     } else if (filter == 'field') {
       GRADES = [0, 5, 9];
       keyTitle = <Translate type='text' content='mapKey.field' />
@@ -62,7 +62,7 @@ export default class MunTurnoutMap extends Component {
       GRADES = [0, 2, 4];
       keyTitle = <Translate type='text' content='mapKey.athletic' />
     }
-    this.setState({grades: GRADES, keyTitle, filter, checked });
+    this.setState({ grades: GRADES, keyTitle, filter, checked });
   }
 
   getColorRegElg(d, c1, grades) {
@@ -73,25 +73,8 @@ export default class MunTurnoutMap extends Component {
     else { return (c1[0]); }
   }
   style(feature) {
-    //console.log(feature.properties);
-    let PROPERTY, GRADES;
-    if (this.state.filter == 'citizen') {
-      PROPERTY = parseInt(feature.properties.population_number);
-      GRADES = [0,30000, 45000];
-    } else if (this.state.filter == 'complex') {
-      PROPERTY = parseInt(feature.properties.complex);
-      GRADES = [0, 1, 2];
-    } else if (this.state.filter == 'field') {
-      PROPERTY = parseInt(feature.properties.field);
-      GRADES = [0, 5, 9];
-    } else if (this.state.filter == 'hall') {
-      PROPERTY = parseInt(feature.properties.salle);
-      GRADES = [0, 1, 2];
-    } else if (this.state.filter == 'athletic') {
-      PROPERTY = parseInt(feature.properties.atheletic);
-      GRADES = [0, 2, 4];
-    }
-
+    let PROPERTY = parseInt(feature.properties.total_votes_valide * 100 / feature.properties.allreg_sum);
+    let GRADES = [0, 30,35];
     return {
       fillColor: this.getColorRegElg(PROPERTY, ["#ffffcc", "#c2e699", "#78c679", "#238443"], GRADES),
       weight: 2.5,
@@ -106,7 +89,7 @@ export default class MunTurnoutMap extends Component {
     const property = e.target.feature.properties;
     console.log(property);
     this.setState({
-      destroy: false, nom: property.nom,population_number:property.population_number, field: property.field,salle: property.salle, atheletic: property.atheletic, complex: property.complex
+      destroy: false, nom: property.nom, population_number: property.population_number, field: property.field, salle: property.salle, atheletic: property.atheletic, complex: property.complex
     });
     return layer.setStyle({
       weight: 5,
@@ -153,27 +136,25 @@ export default class MunTurnoutMap extends Component {
 
           <GeoJSON
             key={"a" + this.state.filter}
-            data={this.state.shape}
+            data={G_munElec_gov}
             style={this.style.bind(this)}
-          onEachFeature={
-            (feature, layer) => {
-              //sending shapes center to marker component
-              //layer.bindTooltip(feature.properties.NAME_EN,{ permanent: false,className:"tooltipnamear",direction:"right" })
-              layer.on({ mouseover: this.highlightFeature.bind(this) });
-              layer.on({ mouseout: this.resetFeature.bind(this) });
+            onEachFeature={
+              (feature, layer) => {
+                layer.on({ mouseover: this.highlightFeature.bind(this) });
+                layer.on({ mouseout: this.resetFeature.bind(this) });
+              }
             }
-          }
           >
             <Tooltip direction="bottom" className="leafletTooltip" sticky={true} >
               <div>
                 <h3>{this.state.nom}</h3>
-                {this.state.filter=='citizen'?
+                {this.state.filter == 'citizen' ?
                   <h4>{this.state.population_number} {GOV}</h4>
-                  :(this.state.filter=='field'?<h4>{this.state.field} {MUN}</h4>:
-                  (this.state.filter=='hall'?<h4>{this.state.salle} {SALLE}</h4>:
-                  (this.state.filter=='athletic'?<h4>{this.state.atheletic} {ATHLETISM}</h4>:
-                  (this.state.filter=='complex'?<h4>{this.state.complex} {COMPLEX}</h4>:null)
-                )))
+                  : (this.state.filter == 'field' ? <h4>{this.state.field} {MUN}</h4> :
+                    (this.state.filter == 'hall' ? <h4>{this.state.salle} {SALLE}</h4> :
+                      (this.state.filter == 'athletic' ? <h4>{this.state.atheletic} {ATHLETISM}</h4> :
+                        (this.state.filter == 'complex' ? <h4>{this.state.complex} {COMPLEX}</h4> : null)
+                      )))
                 }
               </div>
             </Tooltip>

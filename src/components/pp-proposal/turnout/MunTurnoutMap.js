@@ -8,61 +8,30 @@ import MapKey from './MapKey';
 
 import './MunTurnoutMap.css'
 import Translate from 'react-translate-component';
+import { transparent } from 'material-ui/styles/colors';
 
 export default class MunTurnoutMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shapeIsLoaded: false, shape: config.initShape, key: 1,
-      filter: 'citizen', checked: [true, false, false, false, false],
-      grades: [0, 30, 35], keyTitle: 'Turnout Percentage',
-      nom:'',total_votes: '', allreg_sum: '', turnout: ''
+      shapeIsLoaded: true, shape: config.initShape, key: 1,
+      filter: 'citizen', checked: [true, false],
+      grades: [0, 34, 38], keyTitle: 'Turnout Percentage',
+      nom: '', total_votes: '', allreg_sum: '', turnout: '',
+      dataName:'G_munElec_gov'
     }
-  }
-
-  componentWillMount() {
-    let qString = config.apiUrl + "/api/shape/Tunis_arrondissements";
-    axios({
-      method: 'get',
-      url: qString,
-      headers: {
-        'name': 'Isie',
-        'password': 'Isie@ndDi'
-      }
-    })
-      .then(response => {
-        //console.log(response);
-        this.setState({
-          shape: JSON.parse(response.data.data), key: 2, shapeIsLoaded: true
-        });
-      }
-      )
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   handleRadioFilter(filter, e) {
-    let checked = [false, false, false, false, false];
+    let checked = [false, false];
     checked[parseInt(e.target.value)] = true;
     let GRADES, keyTitle;
-    if (filter == 'citizen') {
-      GRADES = [0, 30000, 45000];
-      keyTitle = <Translate type='text' content='mapKey.citizen' />
-    } else if (filter == 'complex') {
-      GRADES = [0, 1, 2];
-      keyTitle = <Translate type='text' content='mapKey.complex' />
-    } else if (filter == 'field') {
-      GRADES = [0, 5, 9];
-      keyTitle = <Translate type='text' content='mapKey.field' />
-    } else if (filter == 'hall') {
-      GRADES = [0, 1, 2];
-      keyTitle = <Translate type='text' content='mapKey.hall' />
-    } else if (filter == 'athletic') {
-      GRADES = [0, 2, 4];
-      keyTitle = <Translate type='text' content='mapKey.athletic' />
-    }
-    this.setState({ grades: GRADES, keyTitle, filter, checked });
+    if (filter == 'govLevel') {
+      this.setState({dataName:'G_munElec_gov',grades:[0, 34, 38]});
+    } else if (filter == 'munLevel') {
+      this.setState({dataName:'G_munElec_mun',grades:[0, 34, 38]});
+    } 
+    this.setState({ filter, checked });
   }
 
   getColorRegElg(d, c1, grades) {
@@ -72,24 +41,49 @@ export default class MunTurnoutMap extends Component {
     /* else if (d > grades[0]) { return (c1[1]); } */
     else { return (c1[0]); }
   }
+
   style(feature) {
-    let PROPERTY = parseInt(feature.properties.total_votes_valide * 100 / feature.properties.allreg_sum);
-    let GRADES = [0, 30,35];
-    return {
-      fillColor: this.getColorRegElg(PROPERTY, ["#ffffcc", "#c2e699", "#78c679", "#238443"], GRADES),
-      weight: 2.5,
-      opacity: 2,
-      color: 'black',
-      dashArray: '3',
-      fillOpacity: 0.7
-    };
+    let PROPERTY = parseInt(feature.properties.total_votes * 100 / feature.properties.allreg_sum);
+    let GRADES = [0, 34, 38];
+    if (this.state.filter=='govLevel') {
+      return {
+        fillColor: this.getColorRegElg(PROPERTY, ["#ffffcc", "#c2e699", "#78c679", "#238443"], GRADES),
+        weight: 2.5,
+        opacity: 2,
+        color: 'black',
+        dashArray: '3',
+        fillOpacity: 0.7
+      };
+    }else{
+      return {
+        fillColor: this.getColorRegElg(PROPERTY, ["#ffffcc", "#c2e699", "#78c679", "#238443"], GRADES),
+        weight: 1.2,
+        opacity: 0.7,
+        color: 'grey',
+        dashArray: '1',
+        fillOpacity: 0.7
+      };
+    }
   }
+  styleGovLimiter(feature) {    
+      return {
+        fillColor: 'none',
+        weight: 2.5,
+        opacity: 2,
+        color: 'black',
+        dashArray: '3',
+        fillOpacity: 0.7
+      };
+
+    
+  }
+
   highlightFeature(e) {
     const layer = e.target;
     const property = e.target.feature.properties;
     console.log(property);
     this.setState({
-      nom:property.NAME_EN ,destroy: false, total_votes: property.total_votes, allreg_sum: property.allreg_sum, turnout: ((property.total_votes*100)/property.allreg_sum).toFixed(2)
+      nom: property.NAME_EN, destroy: false, total_votes: property.total_votes, allreg_sum: property.allreg_sum, turnout: ((property.total_votes * 100) / property.allreg_sum).toFixed(2)
     });
     return layer.setStyle({
       weight: 5,
@@ -98,6 +92,7 @@ export default class MunTurnoutMap extends Component {
       fillOpacity: 1
     });
   }
+
   resetFeature(e) {
     var layer = e.target;
     layer.setStyle({
@@ -119,12 +114,14 @@ export default class MunTurnoutMap extends Component {
     return (
       <div className='container'>
         <section className='row col-md-12' >
+
           <div className="md-radio md-radio-inline">
-            <input id="3" type="radio" name="g2" value={0} onClick={this.handleRadioFilter.bind(this, 'citizen')} checked={this.state.checked[0]} />
+            <input id="3" type="radio" name="g2" value={0} onClick={this.handleRadioFilter.bind(this, 'govLevel')} checked={this.state.checked[0]} />
             <label htmlFor="3">{GOV}</label>
           </div>
+
           <div className="md-radio md-radio-inline">
-            <input id="4" type="radio" name="g2" value={1} onClick={this.handleRadioFilter.bind(this, 'complex')} checked={this.state.checked[1]} />
+            <input id="4" type="radio" name="g2" value={1} onClick={this.handleRadioFilter.bind(this, 'munLevel')} checked={this.state.checked[1]} />
             <label htmlFor="4">{MUN}</label>
           </div>
         </section>
@@ -136,7 +133,7 @@ export default class MunTurnoutMap extends Component {
 
           <GeoJSON
             key={"a" + this.state.filter}
-            data={G_munElec_gov}
+            data={window[this.state.dataName]}
             style={this.style.bind(this)}
             onEachFeature={
               (feature, layer) => {
@@ -145,19 +142,23 @@ export default class MunTurnoutMap extends Component {
               }
             }
           >
+
             <Tooltip direction="bottom" className="leafletTooltip" sticky={true} >
               <div>
-                <h3 style={{textAlign:'center'}}>{this.state.nom}</h3>
-                
+                <h3 style={{ textAlign: 'center' }}>{this.state.nom}</h3>
                 <h4>{TURNOUT} : {this.state.turnout} %</h4>
                 <h4>{REGISTRATION} : {commaNum(this.state.allreg_sum)} </h4>
                 <h4>{TOTALVOTES} : {commaNum(this.state.total_votes)} </h4>
-                      
-                
               </div>
             </Tooltip>
-
           </GeoJSON>
+
+          <GeoJSON
+            key={"a" + this.state.filter}
+            data={G_munElec_gov}
+            style={this.styleGovLimiter.bind(this)}
+           
+          />
 
           <Control position="topright" >
             <p>{HOVER}</p>

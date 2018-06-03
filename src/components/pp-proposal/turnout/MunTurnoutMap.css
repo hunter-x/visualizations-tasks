@@ -1,3 +1,9 @@
+.leafletTooltip{
+  border-radius: 25px;
+  top: 0;
+  margin-top: 0;
+
+}
 .info {
   padding: 6px 8px;
   font: 14px/16px Arial, Helvetica, sans-serif;
@@ -7,7 +13,7 @@
   border-radius: 5px;
 }
 .info h4 {
-  margin: 0 0 5px;
+  margin: 0 0 10px;
   color: #777;
 }
 .legend {

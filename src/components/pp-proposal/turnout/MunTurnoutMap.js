@@ -15,8 +15,8 @@ export default class MunTurnoutMap extends Component {
     this.state = {
       shapeIsLoaded: false, shape: config.initShape, key: 1,
       filter: 'citizen', checked: [true, false, false, false, false],
-      grades: [0, 30, 35], keyTitle: 'Number of citizens',
-      nom: '', population_number: '', field: '', salle: '', atheletic: '', complex: ''
+      grades: [0, 30, 35], keyTitle: 'Turnout Percentage',
+      nom:'',total_votes: '', allreg_sum: '', turnout: ''
     }
   }
 
@@ -89,7 +89,7 @@ export default class MunTurnoutMap extends Component {
     const property = e.target.feature.properties;
     console.log(property);
     this.setState({
-      destroy: false, nom: property.nom, population_number: property.population_number, field: property.field, salle: property.salle, atheletic: property.atheletic, complex: property.complex
+      nom:property.NAME_EN ,destroy: false, total_votes: property.total_votes, allreg_sum: property.allreg_sum, turnout: ((property.total_votes*100)/property.allreg_sum).toFixed(2)
     });
     return layer.setStyle({
       weight: 5,
@@ -110,9 +110,9 @@ export default class MunTurnoutMap extends Component {
     // console.log(dataSport);
     const GOV = <Translate type='text' content='box.gov' />//Governorate level
     const MUN = <Translate type='text' content='box.mun' />//Municipality level
-    const FIELD = <Translate type='text' content='box.field' />//Sports fields
-    const SALLE = <Translate type='text' content='box.salle' />//sports Hall
-    const ATHLETISM = <Translate type='text' content='box.athletism' />//Athletics Track
+    const REGISTRATION = <Translate type='text' content='MunTurnoutMap.REGISTRATION' />//REGISTRATION
+    const TURNOUT = <Translate type='text' content='MunTurnoutMap.TURNOUT' />//TURNOUT
+    const TOTALVOTES = <Translate type='text' content='MunTurnoutMap.TOTALVOTES' />//TOTAL VOTES
 
     const HOVER = <Translate type='text' content='map.hover' />//Hover Over the map for more info
     const LOADING = <Translate type='text' content='map.loading' />//Loading Map
@@ -147,15 +147,13 @@ export default class MunTurnoutMap extends Component {
           >
             <Tooltip direction="bottom" className="leafletTooltip" sticky={true} >
               <div>
-                <h3>{this.state.nom}</h3>
-                {this.state.filter == 'citizen' ?
-                  <h4>{this.state.population_number} {GOV}</h4>
-                  : (this.state.filter == 'field' ? <h4>{this.state.field} {MUN}</h4> :
-                    (this.state.filter == 'hall' ? <h4>{this.state.salle} {SALLE}</h4> :
-                      (this.state.filter == 'athletic' ? <h4>{this.state.atheletic} {ATHLETISM}</h4> :
-                        (this.state.filter == 'complex' ? <h4>{this.state.complex} {COMPLEX}</h4> : null)
-                      )))
-                }
+                <h3 style={{textAlign:'center'}}>{this.state.nom}</h3>
+                
+                <h4>{TURNOUT} : {this.state.turnout} %</h4>
+                <h4>{REGISTRATION} : {commaNum(this.state.allreg_sum)} </h4>
+                <h4>{TOTALVOTES} : {commaNum(this.state.total_votes)} </h4>
+                      
+                
               </div>
             </Tooltip>
 
@@ -182,5 +180,7 @@ export default class MunTurnoutMap extends Component {
       </div>);
   }
 }
-
+const commaNum = (x) => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 

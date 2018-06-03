@@ -32,5 +32,11 @@ module.exports = {
     box:{
         gov:'Governorate Level',
         mun:'Municipality Level'
+    },
+    MunTurnoutMap:{
+        TURNOUT:'Turnout',
+        REGISTRATION:'Registration',
+        TOTALVOTES:'Total Votes'
+        
     }
 }

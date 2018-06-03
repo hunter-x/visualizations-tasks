@@ -1,0 +1,351 @@
+﻿id;NAME_EN;POP;chair;gouv_name;state;area;LABEL_AR;NAME_AR
+1;abida;24294;24;Medenine;old;158.01;اجيم;اجيم
+2;agareb;114486;36;Ariana;old;18.38;اريانة;أريانة
+3;aîn djeloula;10835;18;Nabeul;extended;91.03;أزمور;أزمور
+4;aïn drahem;27200;24;Sousse;extended;23.10;أكودة;أكودة
+5;aïn el khemaïssia;25267;24;SidiBouzid;new;349.4;الاحواز;لسودة
+6;ajim;20406;18;Mahdia;extended;109.02;البرادعة;البرادعة
+7;akouda;13701;18;Manouba;new;172.1;البساتين;البساتين
+8;amiret el fehoul;18977;18;Manouba;extended;156.75;البطان;البطان
+9;amiret el hojjaj;17850;18;Monastir;old;43.99;البقالطة;البقالطة
+10;amiret touazra;84312;30;Ariana;old;3.29;التضامن;التضامن
+11;Ariana;38695;24;Jendouba;new;249.164;التطور;سوق السبت
+12;azmour;44748;24;Manouba;extended;182.8;الجديدة;الجديدة
+13;bahra;9807;12;Kef;old;176.24;الجريصة;الجريصة
+14;balta bou aouane;33866;24;Mahdia;extended;167.3;الجم;الجم
+15;bargou;19455;18;Sfax;new;46.42;الحاجب;الحاجب
+16;baten elghezel;54192;30;Gabes;extended;944.90;الحامة;الحامة
+17;bechelli;11211;18;Siliana;new;379.835;الحبابسية;الحبابسة
+18;Beja;19320;18;Gabes;new;1695.2;الحبيب ثامر;الحبيب ثامر - بوعطوش
+19;bekalta;18797;18;Bizerte;new;364.8;الحشاشنة;الحشاشنة
+20;belkhir;16632;18;Mahdia;new;81.887;الحكائمة;الحكايمة
+21;bembla el manara;83633;30;Nabeul;extended;131.752;الحمامات;الحمامات
+22;Ben Arous;32247;24;Sfax;extended;351.80;الحنشة;الحنشة
+23;ben guerdane;19156;18;BenArous;extended;180;الخليدية;الخليدية
+24;benen bodher;12175;12;Jendouba;new;169.198;الخمايرية;الخمايرية
+25;beni hassen;26787;24;Manouba;old;3.47;الدندان;الدندان
+26;beni khalled;27907;24;Kef;extended;549.95;الدهماني;الدهماني
+27;beni khiar;10311;18;Mahdia;old;15.42;الرجيش;الرجيش
+28;beni m'tir;14958;18;Kasserine;new;236.1;الرخمات;الرخمات
+29;beni-khedech;26976;24;Gafsa;extended;403.51;الرديف;الرديف
+30;bennour;41823;24;SidiBouzid;extended;741.30;الرقاب;الرقاب
+31;bir ali ben khelifa;14740;18;Siliana;extended;281.71;الروحية;الروحية
+32;bir el hafey;9125;12;Gabes;extended;118.08;الزارات;الزارات
+33;bir lahmar;24617;18;Zaghouan;extended;339.26;الزريبة;الزريبة
+34;bir m'chergua;34962;24;BenArous;old;7;الزهراء;الزهراء
+35;Bizerte;64532;30;Sousse;old;10.08;الزهور;الزهور
+36;borj el amri;21819;18;Kasserine;new;3.17;الزهور;الزهور - القصرين
+37;bou argoub;18996;18;Monastir;old;29.01;الساحلين;الساحلين - معتمر
+38;bou charray ech-cherifet;40206;24;Kairouan;extended;746.10;السبيخة;السبيخة
+39;bou merdes;17787;18;Kef;extended;282.8;السرس;السرس
+40;bou mhel el bassatine;6073;12;Beja;new;83.878;السلوقية;السلوقية
+41;bou salem;21487;18;Gafsa;extended;448.85;السند;السند
+42;bouarada;29324;24;Mahdia;extended;194.7;السواسي;السواسي
+43;bou-chemma;24515;18;Mahdia;extended;116.49;الشابة;الشابة
+44;bouficha;20275;18;Kairouan;extended;295.33;الشبيكة;الشبيكة
+45;bou-ghrara;13692;18;Kairouan;extended;137.55;الشراردة;الشراردة
+46;bouhajla;13826;18;Kairouan;new;192.166;الشرايطية القصور;الشرايطية - القصور
+47;bou-hjar;23899;18;Kasserine;new;640.3;الشرائع مشرق الشمس;الشرائع - مشرق الشمس
+48;bourouis;12210;18;Nabeul;new;44.10;الشريفات-بوشراي;الشريفات - بوشراي
+49;bouzguam;34673;24;Sfax;extended;908.77;الصخيرة;الصخيرة
+50;carthage;14793;18;Tataouine;new;1990.08;الصمار;الصمار
+51;cebalet ouled asker;8498;12;Nabeul;extended;50.37;الصمعة;الصمعة
+52;chaouachi;6592;12;Kef;extended;322.26;الطويرف;الطويرف
+53;chebba;27057;24;Bizerte;extended;84.89;العالية;العالية
+54;chenini eddouiret;30599;24;Sfax;new;180.25;العامرة;العامرة
+55;chenini nahal;9907;12;Siliana;extended;360.34;العروسة;العروسة
+56;cherahil;17804;18;Sfax;new;340.24;العشاش;العشاش بوجربوع العوادنة ماجل الدرج
+57;cheraitia;28991;24;Kairouan;extended;361.02;العلا;العلا
+58;chihia;11993;18;Zaghouan;new;548.1;العمايم;العمايم
+59;chorbane;34944;24;Sfax;new;167.10;العوابد الخزانات;العوابد - الخزانات
+60;chott meriam;43333;24;Sfax;old;14.92;العين;العين
+61;dahmani;19211;18;Kasserine;new;411.25;العيون;العيون
+62;dar allouch;15776;18;Sfax;extended;431.27;الغريبة;الغريبة
+63;dar châabane;34456;24;Zaghouan;extended;377.8;الفحص;الفحص
+64;deguach;15376;18;Kebili;new;7231.97;الفوار;الفوار
+65;dekhilet toujane;22116;18;Sousse;new;134.48;القريمات هيشر;القريمات - هيشر
+66;den-den;29739;24;Gafsa;extended;281.61;القصر;القصر
+67;dhehbia;31823;24;Kasserine;extended;582.0;القصرين;القصرين
+68;djebeniana;15215;18;Kef;extended;450.04;القصور;القصور
+69;djedaïda;20137;18;Gafsa;extended;932.66;القطار;القطار
+70;djedeliane;7912;12;Kebili;old;51.74;القلعة;القلعة
+71;djerissa;6652;12;Kef;extended;206.33;القلعة الخصباء;القلعة الخصباء
+72;djoumine;37797;24;Sousse;extended;102.49;القلعة الصغرى;القلعة الصغرى
+73;douar hicher;59132;30;Sousse;extended;238.30;القلعة الكبرى;القلعة الكبرى
+74;douz;13377;18;Jendouba;new;241.412;القلعة المعدن فرقصان;القلعة - المعدن - فرقصان
+75;echbika;165761;36;Kairouan;extended;460.60;القيروان;القيروان
+76;ech-chraya machrek ech-chams;60876;30;Kef;extended;217.4;الكاف;الكاف
+77;echrarda;74132;30;Tunis;old;9.58;الكرم;الكرم
+78;el achech;20155;18;Siliana;extended;424.01;الكريب;الكريب
+79;el ahouaz;38634;24;Gafsa;extended;972.6;المتلوي;المتلوي
+80;el aïn;34257;24;Sfax;extended;435.75;المحرص;المحرص
+81;el aîn el beidha;66439;30;BenArous;extended;98.33;المحمدية;المحمدية
+82;el alâa;5472;12;Kef;new;147.60;المرجى;المرجى
+83;el alia;92987;30;Tunis;old;31.6;المرسى;المرسى
+84;el amiem;28986;24;Manouba;extended;88.6;المرناقية;المرناقية
+85;el amra;104538;36;BenArous;old;16;المروج;المروج
+86;el aouabed khazanet;12930;18;Sousse;old;5.69;المسعدين;المسعدين
+87;el aroussa;15321;18;Gabes;extended;146.06;المطوية;المطوية
+88;el ayoun;15306;18;Gafsa;extended;643.95;المظيلة;المظيلة
+89;el bassatine;15554;18;Beja;extended;213.61;المعقولة;المعقولة
+90;el battane;10994;18;Nabeul;extended;23.18;المعمورة;المعمورة
+91;el bradâa;23789;18;SidiBouzid;extended;623.30;المكانسي;المكناسي
+92;el djem;57111;30;Monastir;old;56.61;المكنين;المكنين
+93;el fahs;93306;30;Monastir;old;42.95;المنستير;المنستير
+94;el galaa el mâaden forgassen;9658;12;SidiBouzid;new;226.291;المنصورة;المنصورة
+95;el ghraiba;89884;30;Ariana;new;23.56;المنيهلة;المنيهلة
+96;el golaa;52602;30;Mahdia;extended;68.66;المهدية;المهدية
+97;el guetar;26995;24;Nabeul;extended;155.19;الميدة;الميدة
+98;el hababsa;15051;18;Jendouba;new;241.412;الناظور;الناظور
+99;el hachachna;30366;24;Zaghouan;extended;355.43;الناظور;الناظور
+100;el hajeb;20855;18;Sfax;new;662.1;الناظور سيدي علي;الناظور - سيدي علي بلعابد
+101;el hamma;16976;18;Sfax;new;174.9;النصر;النصر
+102;el haouaria;27219;24;Sousse;extended;243.20;النفيضة;النفيضة
+103;el hekaima;40573;24;Kasserine;new;4.58;النور;النور
+104;el hencha;25995;24;Nabeul;extended;136.3;الهوارية;الهوارية
+105;el krib;21814;18;Monastir;old;51.31;الوردانين;الوردانين
+106;el ksar;27672;24;Kairouan;extended;758.2;الوسلاتية;الوسلاتية
+107;el ksour;22798;18;Gafsa;extended;798.9;أم العرائس;أم العرائس
+108;el mâagoula;19922;18;Bizerte;new;381.12;اوتيك;أوتيك
+109;el mâamoura;19579;18;SidiBouzid;extended;422.09;اولاد حفوز;أولاد حفوز
+110;el mansoura;23020;18;Mahdia;extended;357.60;اولاد شامخ;أولاد شامخ
+111;el marja;83780;30;Beja;extended;49.98;باجة;باجة
+112;el metouia;71691;30;Tunis;old;6.67;باردو;باردو
+113;el mida;15507;18;SidiBouzid;new;277.1;باطن G23;باطن الغزال
+114;El Mnihla;17408;18;Manouba;extended;175.74;برج العامري;برج العامري
+115;el mourouj;12482;18;Siliana;extended;457.56;برقو;برقو
+116;El Ooueslatia;8960;12;Kebili;new;912.990;بشري فطناسة;بشري فطناسة
+117;en nadhour;13141;18;Kebili;new;430.280;بشلي جرسين البليدات;بشلي - جرسين - البليدات
+118;enfidha;14784;18;Gafsa;new;840.21;بلخير;بلخير
+119;en-nadhour sidi ali belabed;30268;24;Jendouba;new;266.19;بلطة بوعوان;بلطة بوعوان
+120;en-nasr;88322;30;BenArous;old;14.56;بن عروس;بن عروس
+121;ennour;79912;30;Medenine;extended;4799.3;بن قردان;بن قردان
+122;errakhmet;14258;18;Monastir;old;18.5;بنان بوضر;بنان - بوضر
+123;er-rouhia;16087;18;Monastir;old;21.29;بنبلة المنارة;بنبلة - المنارة
+124;essaïda;167759;36;Bizerte;extended;457.97;بنزرت;بنزرت
+125;es-sers;24183;18;SidiBouzid;new;445.2;بنور;الفائض بنور
+126;es-slouguia;8801;12;Monastir;old;29.97;بني حسان;بني حسان
+127;essouassi;25885;24;Medenine;extended;1385.75;بني خداش;بني خداش
+128;Ettadhamen;26135;24;Nabeul;extended;77.33;بني خلاد;بني خلاد
+129;ettataouer souk el sebt;23640;18;Nabeul;extended;32.77;بني خيار;بني خيار
+130;ez zeriba;5553;12;Jendouba;extended;85.56;بني مطير;بني مطير
+131;ez-zahra;6168;12;Kef;new;166.855;بهرة;بهرة
+132;ezzarat;16726;18;Mahdia;extended;87.68;بو مردس;بومرداس
+134;Ezzouhour;6137;12;Monastir;old;4.33;بوحجر;بوحجر
+133;ezzouhour;47615;24;Kairouan;extended;382.3;بوحجلة;بوحجلة
+135;faouar;12618;18;Siliana;extended;274.20;بورويس;بورويس
+136;fatnassa;14579;18;Kasserine;new;375.9;بوزقام;بوزقام
+137;feriana;43997;24;Jendouba;extended;319.04;بوسالم;بوسالم
+138;fernana;12182;18;Gabes;new;104.23;بوشمة;بوشمة
+139;fondouk djedid;20444;18;Siliana;extended;376.49;بوعرادة;بوعرادة
+140;fouchana;30942;24;Nabeul;extended;131.53;بوعرقوب;بوعرقوب
+141;foussana;18309;18;Medenine;new;392.449;بوغرارة;بوغرارة
+142;gâafour;26763;24;Sousse;extended;261.10;بوفيشة;بوفيشة
+143;Gabes;40101;24;BenArous;old;20.16;بومهل البساتين;بومهل البساتين
+144;Gafsa;8460;12;Tataouine;extended;244.26;بير الأحمر;بئر الأحمر
+145;gerimet;24751;18;SidiBouzid;extended;310.2;بئر الحفي;بئر الحفي
+146;ghanouch;14604;18;Zaghouan;extended;305.10;بئر المشارقة;بئر مشارقة
+147;ghar el meleh;31823;24;Sfax;extended;545.30;بئر علي بن خليفة;بئر علي بن خليفة
+148;ghardimaou;19658;18;Kef;extended;573.72;تاجروين;تاجروين
+149;ghezala;9388;12;Nabeul;old;19.49;تازركة;تازركة
+150;ghnada;22151;18;Nabeul;old;278.4;تاكلسة;تاكلسة
+151;ghomrassen;37128;24;Kasserine;extended;716.10;تالة;تالة
+152;goubellat;22115;18;Beja;extended;395.14;تبرسق;تبرسق
+153;gremda;15322;18;Nabeul;new;173.6;تزغران زاوية المقايز;تزغران - زاوية المقايز
+154;grombalia;27540;24;Beja;extended;558.32;تستور;تستور
+155;habib thameur;88232;30;Tataouine;extended;2873.0;تطاوين;تطاوين
+156;hafouz;17101;18;Kasserine;extended;590.7;تلابت;تلابت
+157;hajeb el ayoun;14745;18;Mahdia;new;119.1;تلاسة;تلالسة
+158;hamet ejrid;6516;12;Tozeur;extended;938.63;تمغزة;تمغزة
+159;hammam el guezaz;46422;24;Tozeur;extended;817.06;توزر;توزر
+160;hammam Sousse;637568;60;Tunis;old;122.14;تونس;تونس
+161;hammamet;11206;18;Beja;new;114.33;تيبار;تيبار
+162;hammem chatt;23455;18;Bizerte;extended;60.79;تينجة;تينجة
+163;hammem lif;33960;24;Mahdia;extended;111.47;ثصور الساف;قصور الساف
+164;hassi el ferid;9783;12;Zaghouan;extended;229.41;جبل الوسط;جبل الوسط
+165;hazeg el louza;30764;24;Sfax;extended;189.40;جبنيانة;جبنيانة
+166;hazoua;12297;18;Kasserine;extended;274.89;جدليان;جدليان
+167;hebira;45223;24;Medenine;extended;667.62;جرجيس;جرجيس
+168;hergla;30159;24;Medenine;new;217.07;جرجيس الشمالية;جرجيس الشمالية
+169;hidra;24732;18;SidiBouzid;extended;325.7;جلمة;جلمة
+170;houmet essouk;50275;30;Monastir;old;144.35;جمال;جمال
+171;jamel;7209;12;Kebili;extended;656.13;جمنة;جمنة
+172;jaouaouada;74421;36;Jendouba;extended;294.26;جندوبة;جندوبة
+173;jebel oust;24756;18;Kairouan;new;251.44;جهينة;جهينة
+174;jehina;16739;18;Jendouba;new;98.669;جوادة;الجواودة
+175;jemna;29029;24;Bizerte;new;551.71;جومين;جومين
+176;Jendouba;24697;18;Kairouan;extended;352.78;حاجب العيون;حاجب العيون
+177;jilma;19400;18;Kasserine;new;968.35;حاسي الفريد;حاسي الفريد
+178;Kairouan;6953;12;Tozeur;extended;582.62;حامة الجريد;حامة الجريد
+179;kalâa kebira;18914;18;Sfax;new;63.908;حزق اللوزة;حزق - اللوزة
+180;kalâa seghira;4700;12;Tozeur;new;1255.75;حزوة;حزوة
+181;Kalaat El Andalous;27110;24;Kairouan;extended;357.65;حفوز;حفوز
+182;kalâat khasba;45711;24;Tunis;old;20.08;حلق الوادي;حلق الوادي
+183;kalâat snan;42518;24;BenArous;old;11.34;حمام الأنف;حمام الأنف
+184;Kasserine;31858;24;BenArous;old;26.71;حمام الشط;حمام الشط
+185;Kebili;9545;12;Nabeul;extended;33.6;حمام الغزاز;حمام الغزاز
+186;kelibia;42691;24;Sousse;old;17.99;حمام سوسة;حمام سوسة
+187;kerkenah;75904;30;Medenine;old;162.27;حومة السوق;حومة السوق
+188;kerker;9762;12;Kasserine;extended;495.68;حيدرة;حيدرة
+189;kesra;17543;18;Kasserine;new;366.29;خمودة;خمودة
+190;ketana;11229;18;Monastir;old;17.65;خنيس;خنيس
+191;Khelidia;46781;24;Nabeul;extended;69.34;دار شعبان;دار شعبان
+192;khemaïria;6182;12;Nabeul;extended;102.7;دار علوش;دار علوش
+193;khenis;10277;18;Gabes;new;318.48;دخيلة توجان;دخيلة توجان
+194;khmouda;21590;18;Tozeur;extended;824.60;دقاش;دقاش
+195;kondar;84090;30;Manouba;extended;9.08;دوار هيشر;دوار هيشر
+196;korba;39270;24;Kebili;extended;7988.37;دوز;دوز
+197;korbus;4295;12;Tataouine;old;3102.79;ذهيبة;الذهيبة
+198;ksar hlel;59998;30;BenArous;old;19.73;رادس;رادس
+199;ksibet el mediouni;29977;24;Bizerte;extended;29.87;رأس الجبل;رأس الجبل
+200;ksibet thrayet;4237;12;Kebili;new;2550.93;رجيم معتوق;رجيم معتوق
+201;ksour essaf;13537;18;SidiBouzid;new;204.504;رحال;رحال
+202;la goulette;14118;18;Bizerte;extended;22.2;رفراف;رفراف
+203;la marsa;24244;18;Kairouan;new;308.875;رقادة;رقادة
+204;lala;10173;18;Tataouine;extended;27154.18;رمادة;رمادة
+205;lamta;106414;36;Ariana;extended;56.16;رواد;روّاد
+206;le bardo;12021;18;Mahdia;new;183.8;زالبة;زالبة
+207;Le Kef;15259;18;Gafsa;new;318.94;زانوش;زانوش
+208;le kram;11829;18;Nabeul;extended;39.16;زاوية الجديدي;زاوية الجديدي
+209;Mahdia;20992;18;Sousse;old;16.18;زاوية سوسة;زاوية سوسة
+210;mahres;6713;12;Monastir;old;12.18;زاوية قنطش;زاوية قنطش
+211;majel bel abbes;16781;18;Monastir;old;93.83;زرمدين;زرمدين
+212;makthar;12830;18;Kef;new;388.342;زعفران دير الكاف;الزعفران - دير الكاف
+213;Manouba;38445;24;Zaghouan;extended;419.89;زغوان;زغوان
+214;mareth;21187;18;Beja;extended;238.17;زهرة مدين;زهرة مدين
+215;mateur;44511;24;Sfax;extended;90.08;ساقية الداير;ساقية الداير
+216;matmata;60244;30;Sfax;extended;24.68;ساقية الزيت;ساقية الزيت
+217;mdhila;17500;18;Kef;extended;730.19;ساقية سيدي يوسف;ساقية سيدي يوسف
+218;medjez el bab;20382;18;SidiBouzid;extended;295.33;سبالة اولاد عسكر;سبالة أولاد عسكر
+219;mednine;22958;18;Kasserine;extended;168.8;سبيبة;سبيبة
+220;megrine;36388;24;Kasserine;extended;236.10;سبيطلة;سبيطلة
+221;meknassy;21369;18;Bizerte;extended;261.5;سجنان;سجنان
+222;melloulech;23175;18;SidiBouzid;new;93.14;سعيدة;سعيدة
+223;menzel abderrahmen;129693;36;Ariana;old;28.30;سكرة;سكرة
+224;menzel bou zelfa;44736;24;Siliana;extended;546.02;سليانة;سليانة
+225;menzel bourguiba;37749;24;Nabeul;extended;49.0;سليمان;سليمان
+226;menzel bouzaïane;174592;36;Sousse;old;32.90;سوسة;سوسة
+227;menzel chaker;18905;18;Kebili;extended;1366.08;سوق الأحد;سوق الأحد
+228;menzel djemil;21660;18;SidiBouzid;new;346.10;سوق الجديد;سوق الجديد
+229;menzel el habib;9965;12;Beja;new;148.16;سيدي اسماعيل;سيدي إسماعيل
+230;menzel en-nour;14222;18;Nabeul;new;190.347;سيدي الجديدي;سيدي الجديدي
+231;menzel farsi;13505;18;Sousse;extended;320.77;سيدي الهاني;سيدي الهاني
+232;menzel harb;4520;12;Monastir;old;19.42;سيدي بنور;سيدي بنور
+233;menzel hayet;7206;12;Tunis;old;2.17;سيدي بو سعيد;سيدي بوسعيد
+234;menzel horr;19693;18;Sousse;extended;129.47;سيدي بو علي;سيدي بوعلي
+235;menzel kamel;4214;12;Gafsa;new;176.9;سيدي بوبكر;سيدي بوبكر
+236;menzel mhiri;73226;24;SidiBouzid;extended;422.96;سيدي بوزيد;سيدي بوزيد
+237;menzel salem;24503;18;Ariana;extended;97.09;سيدي ثابت;سيدي ثابت
+238;menzel temim;109672;36;Tunis;old;64.43;سيدي حسين;سيدي حسين
+239;Messaadine;21100;18;Mahdia;new;148.3;سيدي زيد;سيدي زيد - أولاد مولاهم
+240;metlaoui;8453;12;Monastir;old;13.26;سيدي عامر مسجد عيسى;سيدي عامر- مسجد عيسى
+241;metline;25746;24;Mahdia;extended;444.32;سيدي علوان;سيدي علوان
+242;mezzouna;18556;18;SidiBouzid;extended;387;سيدي علي بن عون;سيدي علي بن عون
+243;midoun;10084;18;Gafsa;new;442.57;سيدي عيش;سيدي عيش
+244;mohamedia;25206;24;Medenine;new;669.00;سيدي مخلوف;سيدي مخلوف
+245;moknine;14404;18;Siliana;new;332.807;سيدي مرشد;سيدي مرشد
+246;Monastir;31716;24;Kairouan;new;311.5;سيسب الدريعات;سيسب الدريعات
+247;mornag;4406;12;Monastir;old;15.49;شراحيل;شراحيل
+248;mornaguia;25935;24;Mahdia;extended;444.32;شربان;شربان
+249;msaken;7294;12;Sousse;new;21.6;شط مريم;شط مريم
+250;Nâassen;7543;12;Tataouine;new;1863.88;شنني الدويرات;تطاوين الجنوبية
+251;Nabeul;19586;18;Gabes;extended;104.23;شنني نحال;شنني - نحال
+252;nadhour;11440;18;Kairouan;new;229.743;شواشي;شواشي
+253;nasrallah;27268;24;Sfax;extended;68.06;شيحية;شيحية
+254;nebeur;280566;36;Sfax;old;44.01;صفاقس;صفاقس
+255;nefta;12651;18;Zaghouan;new;260.86;صواف;صواف
+256;nefza;12962;18;Monastir;old;6.64;صيادة;صيادة
+257;nouvelle matmata;43499;24;Manouba;extended;287.28;طبربة;طبربة
+258;ouachtata;33942;24;Jendouba;extended;134.6;طبرقة;طبرقة
+259;oued ellil;37485;24;Monastir;old;19.47;طبلبة;طبلبة
+260;oued meliz;21727;18;Gabes;new;77.8;طبلبو;طبلبو
+261;ouedhref;7236;12;Monastir;old;12.89;طوزة;طوزة
+262;ouerdanine;43542;24;Sfax;extended;55.90;طينة;طينة
+263;ouled chamekh;15033;18;Kairouan;new;216.982;عبيدة;عبيدة
+264;ouled haffouz;40943;24;Sfax;extended;735.18;عقارب;عقارب
+265;oum el araies;6261;12;Monastir;old;23.41;عميرة التوازرة;عميرة التوازرة
+266;ousja;8121;12;Monastir;old;26.30;عميرة الحجاج;عميرة الحجاج
+267;rades;5255;12;Monastir;old;29.94;عميرة الفحول;عميرة الفحول
+268;rafraf;10253;18;Bizerte;extended;61.1;عوسجة;عوسجة
+269;rahal;12956;18;Kairouan;new;253.246;عين البيضاء;عين البيضاء
+270;rakada;18231;18;Kasserine;new;278.31;عين الخمايسية;عين الخمايسية
+271;Raoued;6780;12;Kairouan;extended;153.62;عين جلولة;عين جلولة
+272;ras el djebel;23227;18;Jendouba;extended;319.7;عين دراهم;عين دراهم
+273;redeyef;50793;36;Jendouba;extended;379.3;غار الدماء;غار الدماء
+274;regueb;9242;12;Bizerte;extended;31.16;غار الملح;غار الملح
+275;rejiche;26977;24;Bizerte;new;409.49;غزالة;غزالة
+276;rejim mâatoug;15957;18;Tataouine;extended;692.11;غمراسن;غمراسن
+277;remada;5068;12;Monastir;old;56.32;غنادة;غنادة
+278;sahline;28051;24;Gabes;old;20.04;غنوش;غنوش
+279;sakiet eddaier;25398;24;Jendouba;extended;213.3;فرنانة;فرنانة
+280;sakiet ezzit;34354;24;Kasserine;extended;414.54;فريانة;فريانة
+281;sakiet sidi youssef;23471;18;Nabeul;new;123.7;فندق الجديد-سلتان;فندق الجديد - سلتان
+282;sanouche;23904;24;Kasserine;extended;546.14;فوسانة;فوسانة
+283;saouef;46717;24;BenArous;new;23.67;فوشانة;فوشانة
+284;sayada;99426;30;Gabes;old;30.68;قابس;قابس
+285;sbeitla;15762;18;Beja;extended;415.29;قبلاط;قبلاط
+286;sbiba;41951;24;Kebili;extended;1915.20;قبلي;قبلي
+287;sbikha;59578;30;Nabeul;extended;186.40;قربة;قربة
+288;sedjnane;3532;12;Nabeul;old;49.15;قربص;قربص
+289;Sfax;17010;18;Tunis;old;6.15;قرطاج;قرطاج
+290;sidi aïch;15501;18;Sfax;old;152.19;قرقنة;قرقنة
+291;sidi ali ben aoun;44004;24;Nabeul;extended;173.5;قرمبالية;قرمبالية
+292;sidi alouane;43333;24;Sfax;old;14.12;قرمدة;قرمدة
+293;sidi ameur masjed aïssa;49376;24;Monastir;old;22.01;قصر هلال;قصر هلال
+294;sidi bennour;11312;18;Sousse;old;37.03;قصيبة الثريات;قصيبة - الثريات
+295;sidi bou ali;13082;18;Monastir;old;5.74;قصيبة المديوني;قصيبة المديوني
+296;sidi bou saïd;16934;18;Siliana;extended;460.76;قعفور;قعفور
+297;sidi boubaker;111170;36;Gafsa;extended;1284.25;قفصة;قفصة
+298;Sidi Bouzid;26796;24;Ariana;extended;189.25;قلعة الأندلس;قلعة الأندلس
+299;sidi djedidi;15621;18;Kef;extended;515.14;قلعة السنان;قلعة سنان
+300;sidi el heni;47656;24;Nabeul;extended;34.33;قليبية;قليبية
+301;sidi hassine;13310;18;Gabes;new;222.4;كتانة;كتانة
+302;sidi makhlouf;17164;18;Mahdia;extended;103.30;كركر;كركر
+303;sidi morched;16404;18;Siliana;extended;439.15;كسرى;كسرى
+304;sidi smaîl;13565;18;Sousse;extended;178.24;كندار;كندار
+305;Sidi Thabet;6743;12;Gafsa;new;62.96;لالالة;لالة
+306;sidi zid;5790;12;Monastir;old;1.81;لمطة;لمطة
+307;Siliana;14146;18;Bizerte;extended;32;ماتلين;ماتلين
+308;sisseb;23315;18;Kasserine;extended;886.57;ماجل بلعباس;ماجل بلعباس
+309;skhira;30410;24;Gabes;extended;345.79;مارث;مارث
+310;smar;46975;24;Bizerte;extended;564.01;ماطر;ماطر
+311;sned;41749;24;Beja;extended;459.74;مجاز الباب;مجاز الباب
+312;soliman;91100;30;Medenine;extended;676.09;مدنين;مدنين
+313;somâa;42362;24;BenArous;extended;217.92;مرناق;مرناق
+314;souk el ahed;24766;18;SidiBouzid;extended;1136.95;مزونة;مزونة
+315;souk jedid;84295;30;Sousse;extended;328.40;مساكن;مساكن
+316;Soukra;4444;12;Gabes;extended;1240.86;مطماطة;مطماطة
+317;Sousse;14224;18;Gabes;extended;751.95;مطماطة الجديدة;مطماطة الجديدة
+318;tabarka;26720;24;BenArous;old;10.67;مقرين;مقرين
+319;tajerouine;29052;24;Siliana;extended;347.04;مكثر;مكثر
+320;takelsa;22085;18;Mahdia;extended;160.31;ملولش;ملولش
+321;talalsa;28139;24;Bizerte;extended;72.8;منزل الجميل;منزل جميل
+322;tameghza;10184;18;Gabes;new;951.42;منزل الحبيب;منزل الحبيب
+323;Tataouine;12660;18;Kairouan;extended;262.51;منزل المهيري;منزل المهيري
+324;tazaghrane;11772;18;Monastir;old;8.97;منزل النور;منزل نور
+325;tazerka;61919;30;Bizerte;extended;128.42;منزل بورقيبة;منزل بورقيبة
+326;tebolba;37860;24;Nabeul;extended;132.36;منزل بوزلفة;منزل بوزلفة
+327;teboulbou;25321;24;SidiBouzid;extended;544.51;منزل بوزيان;منزل بوزيان
+328;tebourba;49220;24;Nabeul;extended;130.36;منزل تميم;منزل تميم
+329;teboursouk;16425;18;Nabeul;extended;129.53;منزل حر;منزل حر
+330;telept;4705;12;Monastir;old;18.65;منزل حرب;مصدور - منزل حرب
+331;testour;12952;18;Monastir;old;154.85;منزل حياة;منزل حياة
+332;thala;7934;12;Kef;extended;148.01;منزل سالم;منزل سالم
+333;tibar;19564;18;Sfax;extended;1295.40;منزل شاكر;منزل شاكر
+334;tina;19085;18;Bizerte;old;9.66;منزل عبد الرحمان;منزل عبد الرحمان
+335;tinja;3603;12;Monastir;old;26.09;منزل فارسي;منزل فارسي
+336;touiref;8432;12;Monastir;old;80.34;منزل كامل;منزل كامل
+337;touza;32005;24;Manouba;old;8.68;منوبة;منوبة
+338;Tozeur;63528;30;Medenine;old;176.69;ميدون;ميدون
+339;Tunis;73128;30;Nabeul;extended;72.64;نابل;نابل
+340;utique;13137;18;Kef;extended;229.7;نبر;نبر
+341;zâafrane dyr el Le Kef;21129;18;Kairouan;extended;422.14;نصر الله;نصر الله
+342;Zaghouan;28151;24;BenArous;new;15.107;نعسان;نعسان
+343;zahret medien;29156;24;Beja;extended;317.3;نفزة;نفزة
+344;zalba;21731;18;Tozeur;extended;1636.23;نفطة;نفطة
+345;zaouiet djedidi;10654;18;Mahdia;extended;315.67;هبيرة;هبيرة
+346;zaouiet kontoch;9343;12;Sousse;extended;95.43;هرقلة;هرقلة
+347;zaouit Sousse;69317;30;Manouba;extended;57.76;واد الليل;وادي الليل
+348;zarzis;17843;18;Jendouba;extended;198.21;واد مليز;وادي مليز
+349;zarzis nord;12557;18;Gabes;extended;266.02;وذرف;وذرف
+350;zeramdine;21942;18;Beja;new;275.2;وشتاتة الجميلة;وشتاتة - الجميلة

@@ -1,28 +1,12 @@
-console.clear();
+/* (function() {
+	console.log('jsjsjs');
+	var $body = document.body
+	, $menu_trigger = $body.getElementsByClassName('menu-trigger')[0];
 
-var app = function () {
-	var body = void 0;
-	var menu = void 0;
-	var menuItems = void 0;
-
-	var init = function init() {
-		body = document.querySelector("body");
-		menu = document.querySelector(".menu-icon");
-		menuItems = document.querySelectorAll(".nav__list-item");
-        console.log(document);
-
-		applyListeners();
-	};
-
-	var applyListeners = function applyListeners() {
-		menu.addEventListener("click", function () {
-			return toggleClass(body, "nav-active");
+	if ( typeof $menu_trigger !== 'undefined' ) {
+		$menu_trigger.addEventListener('click', function() {
+			$body.className = ( $body.className == 'menu-active' )? '' : 'menu-active';
 		});
-	};
+	}
 
-	var toggleClass = function toggleClass(element, stringClass) {
-		if (element.classList.contains(stringClass)) element.classList.remove(stringClass);else element.classList.add(stringClass);
-	};
-
-	init();
-}();
+}).call(this); */

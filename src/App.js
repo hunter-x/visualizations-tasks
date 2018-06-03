@@ -15,6 +15,7 @@ export default class App extends Component {
     return (
       <Switch>
       <Route exact path="/" component={RootHome} />
+      
       <Route exact path="/pp-proposal" component={PPMain} />
       <Route exact path="/municipal-turnout18" component={_RootMunTurnout} />
 

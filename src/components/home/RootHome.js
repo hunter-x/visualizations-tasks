@@ -9,15 +9,7 @@ export default class RootHome extends Component {
     super(props);
     this.state = { menuStyle: true, chosenViz: 'boxes', mapZIndex: 150 }
   }
-  openMenu() {
-    //this is trigered wheen the user clicks the menu icon
-    let menuStyle = !this.state.menuStyle
-
-    let mapZIndex;
-    menuStyle == true ? mapZIndex = 150 : mapZIndex = 100;
-    this.setState({ menuStyle, mapZIndex });
-  }
-
+  
   render() {
     let menuStyle = ''; this.state.menuStyle ? menuStyle = '' : menuStyle = 'nav-active'
     let { chosenViz } = this.state;
@@ -35,17 +27,13 @@ export default class RootHome extends Component {
     const DESC_CARD3 = <Translate type='text' content='card.description3' />//Municipal election data
 
     return (
-      <section className={menuStyle} >
-        <Menu activeViz='activeLink'
-          activeAbout=''
-          activeContact=''
-          openMenu={this.openMenu.bind(this)}
-        />
+      <section >
+        <Menu />
         <div className="site-content">
           <h1 className="site-content__headline">{TITLE}</h1>
         </div>
 
-        <div className='container'>
+        <div className='container topTitle' >
           <div className='row col-md-12' style={{zIndex:this.state.mapZIndex}} >
             <Card img="card1.jpg" redirectLink="/one-to-one" title={TITLECARD} description={DESC_CARD} />
             <Card img="card2.jpg" redirectLink="/pp-proposal" title={TITLECARD2} description={DESC_CARD2} />

@@ -1,5 +1,9 @@
 module.exports = {
-    
+    nav:{
+        home:'Home',
+        oneToOne:'One to one',
+        politicalParty:'Political party prop.'
+    },
     language: {
         english: 'English',
         french: 'Français'

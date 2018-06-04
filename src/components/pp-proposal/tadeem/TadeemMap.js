@@ -16,19 +16,7 @@ export default class TadeemMap extends Component {
       shapeIsLoaded: true, shape: config.initShape, key: 1,
       filter: 'govLevel', checked: [true, false],
       grades: [0, 34, 38], keyTitle: 'Turnout Percentage',
-      nom: '', total_votes: '', allreg_sum: '', turnout: '',
-      dataName: 'G_munElec_gov'
-    }
-  }
-
-  handleRadioFilter(filter, e) {
-    let checked = [false, false];
-    checked[parseInt(e.target.value)] = true;
-
-    if (filter == 'govLevel') {
-      this.setState({ dataName: 'G_munElec_gov', grades: [0, 34, 38], filter, checked });
-    } else if (filter == 'munLevel') {
-      this.setState({ dataName: 'G_munElec_mun', grades: [0, 34, 38], filter, checked });
+      nom: '', blank: '', nulled: '', turnout: '',
     }
   }
 
@@ -64,7 +52,7 @@ export default class TadeemMap extends Component {
     const property = e.target.feature.properties;
     console.log(property);
     this.setState({
-      nom: property.NAME_EN, destroy: false, total_votes: property.total_votes, allreg_sum: property.allreg_sum, turnout: ((property.total_votes * 100) / property.allreg_sum).toFixed(2)
+      nom: property.NAME_EN, destroy: false, blank: property.blank_votes_per  , nulled: property.null_votes_per , turnout: (property.turnout).toFixed(2)
     });
     return layer.setStyle({
       weight: 5,
@@ -84,11 +72,9 @@ export default class TadeemMap extends Component {
 
   render() {
     // console.log(dataSport);
-    const GOV = <Translate type='text' content='box.gov' />//Governorate level
-    const MUN = <Translate type='text' content='box.mun' />//Municipality level
-    const REGISTRATION = <Translate type='text' content='MunTurnoutMap.REGISTRATION' />//REGISTRATION
     const TURNOUT = <Translate type='text' content='MunTurnoutMap.TURNOUT' />//TURNOUT
-    const TOTALVOTES = <Translate type='text' content='MunTurnoutMap.TOTALVOTES' />//TOTAL VOTES
+    const BLANKVOTES = <Translate type='text' content='tadeemMap.BLANKVOTES' />//Blank Votes
+    const NULLVOTES = <Translate type='text' content='tadeemMap.NULLVOTES' />//Null votes
 
     const HOVER = <Translate type='text' content='map.hover' />//Hover Over the map for more info
     const LOADING = <Translate type='text' content='map.loading' />//Loading Map
@@ -112,15 +98,14 @@ export default class TadeemMap extends Component {
               }
             }
           >
-
-            {/* <Tooltip direction="bottom" className="leafletTooltip" sticky={true} >
+            <Tooltip direction="bottom" className="leafletTooltip" sticky={true} >
               <div>
                 <h3 style={{ textAlign: 'center' }}>{this.state.nom}</h3>
                 <h4>{TURNOUT} : {this.state.turnout} %</h4>
-                <h4>{REGISTRATION} : {commaNum(this.state.allreg_sum)} </h4>
-                <h4>{TOTALVOTES} : {commaNum(this.state.total_votes)} </h4>
+                <h4>{BLANKVOTES} : {(this.state.blank)} %</h4>
+                <h4>{NULLVOTES} : {(this.state.nulled)} %</h4>
               </div> 
-            </Tooltip>*/}
+            </Tooltip>
           </GeoJSON>
 
           <GeoJSON
@@ -150,8 +135,5 @@ export default class TadeemMap extends Component {
         }
       </div>);
   }
-}
-const commaNum = (x) => {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 

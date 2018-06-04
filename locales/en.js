@@ -1,4 +1,8 @@
 module.exports = {
+    tadeemMap:{
+        BLANKVOTES:'Blank Votes',
+        NULLVOTES:'Null votes',
+    },
     csoMap:{
         tooltipNumber:'NGO',
         tooltipPercentage:'of NGOs',
@@ -7,7 +11,8 @@ module.exports = {
         searchFilter:'Search Filter',
         ngoType:'Ngo Type'
 
-    },nav:{
+    },
+    nav:{
         home:'Home',
         oneToOne:'One to one',
         politicalParty:'Political party prop.'
@@ -22,7 +27,7 @@ module.exports = {
 
     },
     home: {
-        title: 'DI Internal Visualizations Tunis',
+        title: 'DI Tunis Visualizations',
         readmore: 'Read More',
     },
     ppproposal:{

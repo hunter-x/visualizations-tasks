@@ -1,5 +1,9 @@
 module.exports = {
-    nav:{
+    csoMap:{
+        home:'Home',
+        oneToOne:'One to one',
+        politicalParty:'Political party prop.'
+    },nav:{
         home:'Home',
         oneToOne:'One to one',
         politicalParty:'Political party prop.'
@@ -21,6 +25,8 @@ module.exports = {
         title:'Political party proposal', 
         title1: 'Municipal election Turnout 2018 ',
         description1: 'Voter turnout map of the municipal election -\xa0\xa0\xa0\xa0\xa0\xa0\xa0 By governorate and municipal level.',
+        title2: 'CSOs Statistics ',
+        description2: 'Number of CSOs & their domain of activity -\xa0\xa0\xa0\xa0\xa0\xa0\xa0 By governorate - 26-05-18.',
         
     },
     card: {

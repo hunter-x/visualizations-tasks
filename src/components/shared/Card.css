@@ -30,7 +30,7 @@
   .card-content {
     padding:15px;
     text-align:left;
-    min-height: 20vh;
+    min-height: 23vh;
     max-height: 45vh;
   }
   /*make the description bigger for smaller pixels*/

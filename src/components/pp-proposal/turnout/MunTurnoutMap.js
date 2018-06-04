@@ -15,7 +15,7 @@ export default class MunTurnoutMap extends Component {
     super(props);
     this.state = {
       shapeIsLoaded: true, shape: config.initShape, key: 1,
-      filter: 'citizen', checked: [true, false],
+      filter: 'govLevel', checked: [true, false],
       grades: [0, 34, 38], keyTitle: 'Turnout Percentage',
       nom: '', total_votes: '', allreg_sum: '', turnout: '',
       dataName:'G_munElec_gov'
@@ -25,13 +25,12 @@ export default class MunTurnoutMap extends Component {
   handleRadioFilter(filter, e) {
     let checked = [false, false];
     checked[parseInt(e.target.value)] = true;
-    let GRADES, keyTitle;
+
     if (filter == 'govLevel') {
-      this.setState({dataName:'G_munElec_gov',grades:[0, 34, 38]});
+      this.setState({dataName:'G_munElec_gov',grades:[0, 34, 38],filter,checked});
     } else if (filter == 'munLevel') {
-      this.setState({dataName:'G_munElec_mun',grades:[0, 34, 38]});
+      this.setState({dataName:'G_munElec_mun',grades:[0, 34, 38],filter,checked});
     } 
-    this.setState({ filter, checked });
   }
 
   getColorRegElg(d, c1, grades) {
@@ -46,22 +45,23 @@ export default class MunTurnoutMap extends Component {
     let PROPERTY = parseInt(feature.properties.total_votes * 100 / feature.properties.allreg_sum);
     let GRADES = [0, 34, 38];
     if (this.state.filter=='govLevel') {
+      console.log('govlevel');
       return {
         fillColor: this.getColorRegElg(PROPERTY, ["#ffffcc", "#c2e699", "#78c679", "#238443"], GRADES),
         weight: 2.5,
         opacity: 2,
         color: 'black',
         dashArray: '3',
-        fillOpacity: 0.7
+        fillOpacity: 1
       };
-    }else{
+    }else if (this.state.filter=='munLevel'){
       return {
         fillColor: this.getColorRegElg(PROPERTY, ["#ffffcc", "#c2e699", "#78c679", "#238443"], GRADES),
         weight: 1.2,
-        opacity: 0.7,
+        opacity: 0.9,
         color: 'grey',
         dashArray: '1',
-        fillOpacity: 0.7
+        fillOpacity: 0.9
       };
     }
   }
@@ -72,10 +72,8 @@ export default class MunTurnoutMap extends Component {
         opacity: 2,
         color: 'black',
         dashArray: '3',
-        fillOpacity: 0.7
+        fillOpacity: 1
       };
-
-    
   }
 
   highlightFeature(e) {
@@ -154,7 +152,7 @@ export default class MunTurnoutMap extends Component {
           </GeoJSON>
 
           <GeoJSON
-            key={"a" + this.state.filter}
+            key={"b" + this.state.filter}
             data={G_munElec_gov}
             style={this.styleGovLimiter.bind(this)}
            

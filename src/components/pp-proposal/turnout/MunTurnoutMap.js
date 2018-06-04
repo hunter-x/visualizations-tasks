@@ -159,7 +159,7 @@ export default class MunTurnoutMap extends Component {
           />
 
           <Control position="topright" >
-            <p>{HOVER}</p>
+            <h5>{HOVER}</h5>
           </Control>
           <Control position="bottomright" >
             <MapKey grades={this.state.grades} colorSet={["#ffffcc", "#c2e699", "#78c679", "#238443"]} keyTitle={this.state.keyTitle} key={this.state.filter} />

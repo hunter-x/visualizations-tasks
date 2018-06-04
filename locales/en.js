@@ -1,8 +1,12 @@
 module.exports = {
     csoMap:{
-        home:'Home',
-        oneToOne:'One to one',
-        politicalParty:'Political party prop.'
+        tooltipNumber:'NGO',
+        tooltipPercentage:'of NGOs',
+        mapTime:'data collected 26-05-18',
+        MapTitle:'CSOs Number',
+        searchFilter:'Search Filter',
+        ngoType:'Ngo Type'
+
     },nav:{
         home:'Home',
         oneToOne:'One to one',

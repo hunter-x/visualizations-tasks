@@ -26,10 +26,22 @@ module.exports = {
         loading: 'Loading Map',
 
     },
-    home: {
-        title: 'DI Tunis Visualizations',
-        readmore: 'Read More',
+   
+    oneToOne:{
+        title:'One To One Project', 
+        title1: 'Determining Sample ',
+        description1: 'The map allow to draw radius arround voting centers taking into concideration informations about registration ..',
+        title2: 'Direct targeting ',
+        description2: 'VC that would get direct intervention with different messages types.',
+        title3: 'Brochure targeting ',
+        description3: 'VC that would get Brochure intervention with different messages types.',
+        title4: 'Brochure distribution advancement ',
+        description4: 'Following the daily brochure distribution percentage.',
+        title5: 'Project Overview ',
+        description5: 'Map contains all the location of control VC, Direct Targeting & Brochure targeting.',
+        
     },
+
     ppproposal:{
         title:'Political party proposal', 
         title1: 'Municipal election Turnout 2018 ',
@@ -37,10 +49,12 @@ module.exports = {
         title2: 'CSOs Statistics ',
         description2: 'Number of CSOs & their domain of activity -\xa0\xa0\xa0\xa0\xa0\xa0\xa0 By governorate. Data collected on 26-05-18.',
         title3: 'Tadeem Project ',
-        description3: 'Municipalities where the Tadeem project operates.',
+        description3: 'Municipalities where the Tadeem project operates + info about turnout, null & blank votes.',
         
     },
-    card: {
+    home: {
+        title: 'DI Tunis Visualizations',
+        readmore: 'Read More',
         title1: 'One to one project ',
         description1: 'The project is about measuring the effect of different type of messages on the Turnout level.',
         title2: 'Political party proposal',

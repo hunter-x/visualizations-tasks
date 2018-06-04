@@ -28,14 +28,19 @@ class Menu extends Component {
         return (
             <div>
                 <div style={{ position: 'absolute', right: 0, margin: '30px' }}>
-                    <DropdownButton
+               
+                 <Link to="/">
+                 <button className="btn success" >home</button>
+                </Link>
+
+                    {/* <DropdownButton
                         title={this.state.dropdown}
                         pullRight
                         onSelect={this.handleChangeDropdown.bind(this)}
                     >
                         <MenuItem eventKey="en">{ENGLISH}</MenuItem>
                          <MenuItem eventKey="fr">{FRENCH}</MenuItem> 
-                    </DropdownButton>
+                    </DropdownButton> */}
                 </div>
             </div>
         );

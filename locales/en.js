@@ -30,7 +30,9 @@ module.exports = {
         title1: 'Municipal election Turnout 2018 ',
         description1: 'Voter turnout map of the municipal election -\xa0\xa0\xa0\xa0\xa0\xa0\xa0 By governorate and municipal level.',
         title2: 'CSOs Statistics ',
-        description2: 'Number of CSOs & their domain of activity -\xa0\xa0\xa0\xa0\xa0\xa0\xa0 By governorate - 26-05-18.',
+        description2: 'Number of CSOs & their domain of activity -\xa0\xa0\xa0\xa0\xa0\xa0\xa0 By governorate. Data collected on 26-05-18.',
+        title3: 'Tadeem Project ',
+        description3: 'Municipalities where the Tadeem project operates.',
         
     },
     card: {

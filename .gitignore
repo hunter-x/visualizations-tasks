@@ -1,5 +1,4 @@
 node_modules
 dist/static/*.js
 webpack.*
-backend
-src/components/crowdsourcing
+data/Aaron One to one/task about determining the sample/

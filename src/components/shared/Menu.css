@@ -14,13 +14,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 10px;
+  margin-top: 8px;
 }
 .site-content__headline {
-  font-weight: 200;
-  line-height: 1.5;
+  font: 600 30px/40px "Poppins", sans-serif;
+  color: #1C2541;
+  margin: 10px 0;
+  font-size: calc(2vw + 5px);
+ /*  font-weight: 200;
+  line-height: 1.5; */
   text-align: center;
-  color: #000000;
-  font-size: calc(2vw + 10px);
+  /* color: #000000;
+   */
 }
 nav#slide-menu {
   position: fixed;
@@ -110,7 +116,7 @@ div#content {
   width: 100%;
   height: 108%;
   padding: 60px;
-  overflow: scroll;
+  overflow: auto;
   background: #ffffff;
   border-radius: 0;
   -moz-box-sizing: border-box;

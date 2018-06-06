@@ -18,6 +18,9 @@ export default class PPMain extends Component {
     /* translation 3rd Card */
     const TITLECARD3 = <Translate type='text' content='ppproposal.title3' />//CSOs Statistics
     const DESC_CARD3 = <Translate type='text' content='ppproposal.description3' />//Number of CSOs & their domain of activity -By governorate - 26-05-18.
+    /* translation 4th Card */
+    const TITLECARD4 = <Translate type='text' content='ppproposal.title4' />//CSOs Statistics
+    const DESC_CARD4 = <Translate type='text' content='ppproposal.description4' />//Number of CSOs & their domain of activity -By governorate - 26-05-18.
 
     return (
       <section>
@@ -28,6 +31,7 @@ export default class PPMain extends Component {
 
         <div className='container topTitle' >
           <div className='row col-md-12'  >
+          <Card img="munturnout18.jpg" redirectLink="/party-sheet" title={TITLECARD4} description={DESC_CARD4} />
           <Card img="munturnout18.jpg" redirectLink="/municipal-turnout18" title={TITLECARD1} description={DESC_CARD1} />
           <Card img="csoNumbert18.jpg" redirectLink="/cso-stat" title={TITLECARD2} description={DESC_CARD2} />
           <Card img="tadeem.jpg" redirectLink="/tadeem" title={TITLECARD3} description={DESC_CARD3} />

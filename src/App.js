@@ -11,6 +11,7 @@ import PPMain from './components/pp-proposal/PPMain' ;
 import _RootMunTurnout from './components/pp-proposal/turnout/_RootMunTurnout' ;
 import _RootCsoNumber from './components/pp-proposal/cso/_RootCsoNumber' ;
 import _RootTadeem from './components/pp-proposal/tadeem/_RootTadeem' ;
+import _RootPartiesSheet from './components/pp-proposal/party cheat sheet/_RootPartiesSheet' ;
 
 /* Aaron */
 import OneMain from './components/one-to-one/OneMain' ;
@@ -32,6 +33,7 @@ export default class App extends Component {
       <Route exact path="/municipal-turnout18" component={_RootMunTurnout} />
       <Route exact path="/cso-stat" component={_RootCsoNumber} />
       <Route exact path="/tadeem" component={_RootTadeem} />
+      <Route exact path="/party-sheet" component={_RootPartiesSheet} />
 
       {/* Aaron Project */}
       <Route exact path="/one-to-one" component={OneMain} />

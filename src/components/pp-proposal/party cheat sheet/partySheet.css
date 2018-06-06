@@ -1,0 +1,38 @@
+.subheaderTitle{
+    font: 300 20px/29px "Poppins", sans-serif!important;
+    color: #5BC0BE!important;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 18px !important ;
+}
+/* Info card in Party sheet */
+.info-card-section{
+    background-size: 100%;
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    padding: 30px 20px;
+    width: 100%;
+    background-color: #F5F7F9;
+}
+.center{
+    text-align: center;
+}
+.info-card-font h2{
+    font: 600 30px/40px "Poppins", sans-serif;
+    color: #1C2541;
+    margin: 10px 0;
+}
+.info-card-font h6{
+    font: 300 20px/32px "Poppins", sans-serif;
+    color: #5BC0BE;
+    margin: 10px 0;
+}
+
+.info-card-font p{
+    font: 400 16px/26px "Lato", sans-serif;
+    color: #868A90;
+    margin: 15px 0;
+}
+.topMap{
+    margin-top: 7vh;
+}

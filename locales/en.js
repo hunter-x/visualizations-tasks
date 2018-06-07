@@ -4,7 +4,10 @@ module.exports = {
         CHAIRS:'Total seats',
         BEST_RES:'Best result',
         RUNNED_MUN:'Runned municipalities',  
-        VOTES_PER:'votes percentage',  
+        VOTES_PER:'votes percentage',
+        SEAT_RES:'Results per votes',
+        VOTES_RES:'Results per seats',
+        SEATS_NUMBER:'Seats number'
     },
     tadeemMap:{
         BLANKVOTES:'Blank Votes',

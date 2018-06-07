@@ -14,9 +14,29 @@ export default class PartyMap extends Component {
     super(props);
     this.state = {
       shapeIsLoaded: true, shape: config.initShape, key: 1,
-      filter: 'govLevel', checked: [true, false],
-      grades: [0, 34, 38], keyTitle: 'Results per votes percentage',
-      nom: '', results_Percentage: '', turnout: '', blank_per: '', deputy: '', seats: ''
+      filter: 'perVotes', checked: [true, false],
+      keyTitle: 'Results per votes percentage', partyName: 'Courant Democratique',
+      nom: '', results_Percentage: '', turnout: '', blank_per: '', deputy: '', seats_num: '',
+      percentageSign:' %'
+    }
+  }
+  componentWillMount() {
+    if (this.state.filter == 'perVotes') {
+      this.setState({ grades: this.props.grades_votes, partyName: this.props.partyName });
+    } else {
+      this.setState({ grades: this.props.grades_seats, partyName: this.props.partyName });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps', nextProps, 'this.state.party_name: ', this.state.party_name);
+    // this is done so that  whenever user changes the select option We reset all properties to initial
+    if (nextProps.partyName != this.state.partyName) {
+      console.log('extProps.grades_votes', nextProps.grades_votes);
+      this.setState({
+        partyName: nextProps.partyName, keyTitle: this.state.keyTitle, keyTitle: 'Results per votes percentage',
+        grades: nextProps.grades_votes, checked: [true, false]
+      });
     }
   }
 
@@ -28,17 +48,32 @@ export default class PartyMap extends Component {
   }
 
   style(feature) {
-    let PROPERTY = parseInt(feature.properties.votes_obtenus * 100 / feature.properties.total_votes_valide);
-    //console.log(PROPERTY);
-    return {
-      fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.props.grades),
-      weight: 1.2,
-      opacity: 0.9,
-      color: 'grey',
-      dashArray: '1',
-      fillOpacity: 0.9
+    const property = feature.properties;
+    // if the radio button filter is per result paint the map selon a certain prop Sinon paint selon another property
+    if (this.state.filter == 'perVotes') {
+      let PROPERTY = parseInt(property.votes_obtenus * 100 / property.total_votes_valide);
+      return {
+        fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.state.grades),
+        weight: 1.2,
+        opacity: 0.9,
+        color: 'grey',
+        dashArray: '1',
+        fillOpacity: 0.9
+      }
+    } else if (this.state.filter == 'perSeats') {
+      let PROPERTY = parseInt(property.sieges_obtenus) ;
+      return {
+        fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.state.grades),
+        weight: 1.2,
+        opacity: 0.9,
+        color: 'grey',
+        dashArray: '1',
+        fillOpacity: 0.9
+      }
     }
+
   }
+
   styleGovLimiter(feature) {
     return {
       fillColor: 'none',
@@ -57,14 +92,14 @@ export default class PartyMap extends Component {
     const turnout = (property.total_votes * 100 / property.allreg_sum).toFixed(2);
     const blank_per = (property.votes_blancs * 100 / property.total_votes).toFixed(2);
     const results_Percentage = (property.votes_obtenus * 100 / property.total_votes_valide).toFixed(2);
-   /*  const seats_per = (property.seats * 100 / property.chair).toFixed(2);
-    const seats_num = property.seats */
+     const seats_per = (property.sieges_obtenus * 100 / property.chair).toFixed(2);
+     const seats_num = property.sieges_obtenus 
     this.setState({
-      nom: property.NAME_EN, destroy: false, deputy: property.deputy,
-      turnout: isNaN(turnout) ? 'None' : turnout+' %',
-      blank_per: isNaN(blank_per) ? 'None' : blank_per+' %',
-      results_Percentage: isNaN(results_Percentage) ? 'None' : results_Percentage+' %'
-      /* ,seats: isNaN(seats_num) ? 'None' : seats_num, */
+      nom: property.NAME_EN, destroy: false, deputy: property.deputy,nom_gov:property.GOV_EN,
+      turnout: isNaN(turnout) ? 'None' : turnout + ' %',
+      blank_per: isNaN(blank_per) ? 'None' : blank_per + ' %',
+      results_Percentage: isNaN(results_Percentage) ? 'None' : results_Percentage + ' %'
+      ,seats_num: (isNaN(seats_num)||seats_num==undefined) ? 'None' : seats_num, 
     });
     return layer.setStyle({
       weight: 5,
@@ -82,12 +117,28 @@ export default class PartyMap extends Component {
     this.setState({ destroy: true });
   }
 
+  handleRadioFilter(filter, e) {
+    let checked = [false, false];
+    checked[parseInt(e.target.value)] = true;
+
+    this.setState({ filter, checked });
+    if (filter == 'perVotes') {
+      this.setState({ grades: this.props.grades_votes, keyTitle: 'Results per votes percentage',percentageSign:' %' });
+    } else if (filter == 'perSeats') {
+      this.setState({ grades: this.props.grades_seats, keyTitle: 'Results per seats number',percentageSign:'' });
+    }
+
+
+  }
+
   render() {
     // console.log(dataSport);
     const VOTES_PER = <Translate type='text' content='partySheet.VOTES_PER' />//votes percentage 
     const TURNOUT = <Translate type='text' content='MunTurnoutMap.TURNOUT' />//Turnout
     const BLANKVOTES = <Translate type='text' content='tadeemMap.BLANKVOTES' />//Blank Votes
-    const NULLVOTES = <Translate type='text' content='tadeemMap.NULLVOTES' />//Null votes
+    const SEATS_NUMBER = <Translate type='text' content='partySheet.SEATS_NUMBER' />//Seats number 
+    const SEAT_RES = <Translate type='text' content='partySheet.SEAT_RES' />//Results per votes
+    const VOTES_RES = <Translate type='text' content='partySheet.VOTES_RES' />//Results per seats
 
     const HOVER = <Translate type='text' content='map.hover' />//Hover Over the map for more info
     const LOADING = <Translate type='text' content='map.loading' />//Loading Map
@@ -113,29 +164,40 @@ export default class PartyMap extends Component {
             <Tooltip direction="bottom" className="leafletTooltip" sticky={true} >
               <div>
                 <h3 style={{ textAlign: 'center' }}>{this.state.nom}</h3>
-                <h4>{VOTES_PER} : {this.state.results_Percentage} </h4>
+                {this.state.filter=='perVotes'?<h4>{VOTES_PER} : {this.state.results_Percentage} </h4>:<h4>{SEATS_NUMBER} : {this.state.seats_num} </h4>}
                 <h4>{BLANKVOTES} : {(this.state.blank_per)} </h4>
                 <h4>{TURNOUT} : {(this.state.turnout)} </h4>
               </div>
             </Tooltip>
           </GeoJSON>
-
           <GeoJSON
-          key={'b'+this.props.shapeToSelect}
+            key={'b' + this.props.shapeToSelect}
             data={G_munElec_gov}
             style={this.styleGovLimiter.bind(this)}
           />
-
           <Control position="topright" >
             <h5>{HOVER}</h5>
           </Control>
           <Control position="bottomright" >
-            <MapKey grades={this.props.grades} colorSet={["#ffffcc", "#c2e699", "#78c679", "#238443"]} keyTitle={this.state.keyTitle} key={this.state.filter} />
+            <MapKey grades={this.state.grades} percentageSign={this.state.percentageSign} keyTitle={this.state.keyTitle}  colorSet={["#ffffcc", "#c2e699", "#78c679", "#238443"]} key={this.state.filter} />
           </Control>
+
           <Control position="topleft"  >
             <div className="col-lg-12 col-sm-2 col-sm-offset-2 col-lg-offset-1">
               <div className="well MenuShadow SideMenuePosition info-card-font">
                 <h6 className='center'>Control the map</h6>
+                <section className='row col-md-12' >
+
+                  <div className="md-radio md-radio-inline" style={{ margin: '10px 0' }}>
+                    <input id="3" type="radio" name="g2" value={0} onClick={this.handleRadioFilter.bind(this, 'perVotes')} checked={this.state.checked[0]} />
+                    <label htmlFor="3">{SEAT_RES}</label>
+                  </div>
+
+                  <div className="md-radio md-radio-inline" style={{ margin: '10px 0' }}>
+                    <input id="4" type="radio" name="g2" value={1} onClick={this.handleRadioFilter.bind(this, 'perSeats')} checked={this.state.checked[1]} />
+                    <label htmlFor="4">{VOTES_RES}</label>
+                  </div>
+                </section>
               </div>
             </div>
           </Control>

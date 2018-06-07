@@ -28,7 +28,7 @@ class MapKey extends Component {
                     return (
                             <div key={i}>
                                 <i style={{background:bg}}  ></i>
-                                {(grades[i + 1] ? (commaNum(grades[i])+' %   -  '+commaNum(grades[i+1]))+' %': ' + '+commaNum(grades[i])+" % " ) }
+                                {(grades[i + 1] ? (commaNum(grades[i])+this.props.percentageSign+'  -  '+commaNum(grades[i+1]))+this.props.percentageSign: ' + '+commaNum(grades[i])+this.props.percentageSign ) }
                                 <br/>
                             </div>
                         )

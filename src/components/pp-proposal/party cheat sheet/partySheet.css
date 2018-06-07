@@ -17,8 +17,13 @@
 .center{
     text-align: center;
 }
-.info-card-font h2{
-    font: 600 30px/40px "Poppins", sans-serif;
+.info-card-font h3{
+    font: 500 30px/35px "Poppins", sans-serif;
+    color: #1C2541;
+    margin: 10px 0;
+}
+.info-card-font h5{
+    font: 500 22px/35px "Poppins", sans-serif;
     color: #1C2541;
     margin: 10px 0;
 }

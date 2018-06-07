@@ -121,6 +121,7 @@ export default class PartyMap extends Component {
           </GeoJSON>
 
           <GeoJSON
+          key={'b'+this.props.shapeToSelect}
             data={G_munElec_gov}
             style={this.styleGovLimiter.bind(this)}
           />

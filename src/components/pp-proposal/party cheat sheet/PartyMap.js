@@ -5,6 +5,7 @@ import axios from 'axios';
 import config from '../../config'
 import Control from 'react-leaflet-control';
 import MapKey from './MapKey';
+import NumericInput from 'react-numeric-input';
 
 import Translate from 'react-translate-component';
 import { transparent } from 'material-ui/styles/colors';
@@ -17,7 +18,7 @@ export default class PartyMap extends Component {
       filter: 'perVotes', checked: [true, false],
       keyTitle: 'Results per votes percentage', partyName: 'Courant Democratique',
       nom: '', results_Percentage: '', turnout: '', blank_per: '', deputy: '', seats_num: '',
-      percentageSign:' %'
+      percentageSign: ' %', maxFilter: 60, minFilter: 0, activeFilter: false
     }
   }
   componentWillMount() {
@@ -27,28 +28,40 @@ export default class PartyMap extends Component {
       this.setState({ grades: this.props.grades_seats, partyName: this.props.partyName });
     }
   }
-
+  
   componentWillReceiveProps(nextProps) {
     console.log('nextProps', nextProps, 'this.state.party_name: ', this.state.party_name);
     // this is done so that  whenever user changes the select option We reset all properties to initial
+    //we also set back the filter values to default 
     if (nextProps.partyName != this.state.partyName) {
       console.log('extProps.grades_votes', nextProps.grades_votes);
       this.setState({
         partyName: nextProps.partyName, keyTitle: this.state.keyTitle, keyTitle: 'Results per votes percentage',
-        grades: nextProps.grades_votes, checked: [true, false]
+        grades: nextProps.grades_votes, checked: [true, false],minFilter:0,maxFilter:60,activeFilter: false
       });
     }
   }
 
   getColorRegElg(d, c1, grades) {
-    if (d > grades[2]) { return (c1[3]); }
-    else if (d > grades[1]) { return (c1[2]); }
-    else if (d > grades[0]) { return (c1[0]); }
-    else { return '#F2F2F0' }
+    //if active filter is true then user has changed values in the input so we do special Style
+    if (this.state.activeFilter == true) {
+      if (d<this.state.minFilter||d>this.state.maxFilter) { return '#F2F2F0'}
+      else if (d > grades[2]) { return (c1[3]); }
+      else if (d > grades[1]) { return (c1[2]); }
+      else if (d > grades[0]) { return (c1[0]); }
+      else { return '#F2F2F0' }
+    } else {
+      if (d > grades[2]) { return (c1[3]); }
+      else if (d > grades[1]) { return (c1[2]); }
+      else if (d > grades[0]) { return (c1[0]); }
+      else { return '#F2F2F0' }
+    }
+
   }
 
   style(feature) {
     const property = feature.properties;
+
     // if the radio button filter is per result paint the map selon a certain prop Sinon paint selon another property
     if (this.state.filter == 'perVotes') {
       let PROPERTY = parseInt(property.votes_obtenus * 100 / property.total_votes_valide);
@@ -61,7 +74,7 @@ export default class PartyMap extends Component {
         fillOpacity: 0.9
       }
     } else if (this.state.filter == 'perSeats') {
-      let PROPERTY = parseInt(property.sieges_obtenus) ;
+      let PROPERTY = parseInt(property.sieges_obtenus);
       return {
         fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.state.grades),
         weight: 1.2,
@@ -92,14 +105,14 @@ export default class PartyMap extends Component {
     const turnout = (property.total_votes * 100 / property.allreg_sum).toFixed(2);
     const blank_per = (property.votes_blancs * 100 / property.total_votes).toFixed(2);
     const results_Percentage = (property.votes_obtenus * 100 / property.total_votes_valide).toFixed(2);
-     const seats_per = (property.sieges_obtenus * 100 / property.chair).toFixed(2);
-     const seats_num = property.sieges_obtenus 
+    const seats_per = (property.sieges_obtenus * 100 / property.chair).toFixed(2);
+    const seats_num = property.sieges_obtenus
     this.setState({
-      nom: property.NAME_EN, destroy: false, deputy: property.deputy,nom_gov:property.GOV_EN,
+      nom: property.NAME_EN, destroy: false, deputy: property.deputy, nom_gov: property.GOV_EN,
       turnout: isNaN(turnout) ? 'None' : turnout + ' %',
       blank_per: isNaN(blank_per) ? 'None' : blank_per + ' %',
       results_Percentage: isNaN(results_Percentage) ? 'None' : results_Percentage + ' %'
-      ,seats_num: (isNaN(seats_num)||seats_num==undefined) ? 'None' : seats_num, 
+      , seats_num: (isNaN(seats_num) || seats_num == undefined) ? 'None' : seats_num,
     });
     return layer.setStyle({
       weight: 5,
@@ -120,17 +133,23 @@ export default class PartyMap extends Component {
   handleRadioFilter(filter, e) {
     let checked = [false, false];
     checked[parseInt(e.target.value)] = true;
-
-    this.setState({ filter, checked });
+    //when user clicks on the radiobutton we update the mapkey,grades and set back the filter values to default
+    this.setState({ filter, checked, activeFilter: false });
     if (filter == 'perVotes') {
-      this.setState({ grades: this.props.grades_votes, keyTitle: 'Results per votes percentage',percentageSign:' %' });
+      this.setState({ grades: this.props.grades_votes, keyTitle: 'Results per votes percentage', percentageSign: ' %',minFilter:0,maxFilter:60 });
     } else if (filter == 'perSeats') {
-      this.setState({ grades: this.props.grades_seats, keyTitle: 'Results per seats number',percentageSign:'' });
+      this.setState({ grades: this.props.grades_seats, keyTitle: 'Results per seats number', percentageSign: '',minFilter:0,maxFilter:60 });
     }
 
 
   }
-
+  //if active filter is true then user has changed values in the input and then style should be adapted accordingly 
+  handleMaxFilter(e) {
+    this.setState({ maxFilter: e.target.value, activeFilter: true });
+  }
+  handleMinFilter(e) {
+    this.setState({ minFilter: e.target.value, activeFilter: true });
+  }
   render() {
     // console.log(dataSport);
     const VOTES_PER = <Translate type='text' content='partySheet.VOTES_PER' />//votes percentage 
@@ -164,7 +183,7 @@ export default class PartyMap extends Component {
             <Tooltip direction="bottom" className="leafletTooltip" sticky={true} >
               <div>
                 <h3 style={{ textAlign: 'center' }}>{this.state.nom}</h3>
-                {this.state.filter=='perVotes'?<h4>{VOTES_PER} : {this.state.results_Percentage} </h4>:<h4>{SEATS_NUMBER} : {this.state.seats_num} </h4>}
+                {this.state.filter == 'perVotes' ? <h4>{VOTES_PER} : {this.state.results_Percentage} </h4> : <h4>{SEATS_NUMBER} : {this.state.seats_num} </h4>}
                 <h4>{BLANKVOTES} : {(this.state.blank_per)} </h4>
                 <h4>{TURNOUT} : {(this.state.turnout)} </h4>
               </div>
@@ -179,7 +198,7 @@ export default class PartyMap extends Component {
             <h5>{HOVER}</h5>
           </Control>
           <Control position="bottomright" >
-            <MapKey grades={this.state.grades} percentageSign={this.state.percentageSign} keyTitle={this.state.keyTitle}  colorSet={["#ffffcc", "#c2e699", "#78c679", "#238443"]} key={this.state.filter} />
+            <MapKey grades={this.state.grades} percentageSign={this.state.percentageSign} keyTitle={this.state.keyTitle} colorSet={["#ffffcc", "#c2e699", "#78c679", "#238443"]} key={this.state.filter} />
           </Control>
 
           <Control position="topleft"  >
@@ -197,6 +216,13 @@ export default class PartyMap extends Component {
                     <input id="4" type="radio" name="g2" value={1} onClick={this.handleRadioFilter.bind(this, 'perSeats')} checked={this.state.checked[1]} />
                     <label htmlFor="4">{VOTES_RES}</label>
                   </div>
+                </section>
+
+                <section className='row col-md-12 '  >
+                  <p style={{ color: '#000' }} >Filter Results between : </p>
+                  <input type="number" onChange={this.handleMinFilter.bind(this)} value={this.state.minFilter} min={0} className='filterResultInput' /> &nbsp; && &nbsp;
+                <input type="number" onChange={this.handleMaxFilter.bind(this)} value={this.state.maxFilter} min={1} className='filterResultInput' />
+
                 </section>
               </div>
             </div>

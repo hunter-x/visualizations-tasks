@@ -41,3 +41,7 @@
 .topMap{
     margin-top: 7vh;
 }
+.filterResultInput{
+width: 40%;
+text-align: center;
+}

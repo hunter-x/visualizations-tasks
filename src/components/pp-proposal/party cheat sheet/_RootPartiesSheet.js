@@ -63,8 +63,8 @@ export default class _RootTadeem extends Component {
                 <FormGroup controlId="typeOfAssoc" onChange={this.handleNgoSector.bind(this)}  >
                   <FormControl componentClass="select" placeholder="All" defaultValue={0}>
                     <option value="" disabled >Select</option>
-                    <option value="75586 - 4,2%**206 - 2,8%**6/12 (Jemna-Kebili)**69/350**Courant Democratique**G_TAYAR_PARTY**[0, 9, 20]**[0,2,4]">Courant Democratique </option>
-                    <option value="19116 - 1%**93 - 1,3%**5/12 (El Hbabsa-Siliana)**43/350**Afek Tounes**G_AFEK_PARTY**[0, 7, 20]**[0,1,4]">Afek Tounes </option>
+                    <option value="75586 - 4,2%**206 - 2,8%**6/12 (Jemna-Kebili)**69/350**Courant Democratique**G_TAYAR_PARTY**[0, 9, 20]**[0,2,4]**50">Courant Democratique </option>
+                    <option value="19116 - 1%**93 - 1,3%**5/12 (El Hbabsa-Siliana)**43/350**Afek Tounes**G_AFEK_PARTY**[0, 7, 20]**[0,1,4]**40">Afek Tounes </option>
                   </FormControl>
                 </FormGroup>
               </div>

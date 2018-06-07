@@ -5,7 +5,7 @@ import axios from 'axios';
 import config from '../../config'
 import Control from 'react-leaflet-control';
 import MapKey from './MapKey';
-import NumericInput from 'react-numeric-input';
+import { FormGroup, FormControl, Form, Radio } from 'react-bootstrap';
 
 import Translate from 'react-translate-component';
 import { transparent } from 'material-ui/styles/colors';
@@ -18,7 +18,7 @@ export default class PartyMap extends Component {
       filter: 'perVotes', checked: [true, false],
       keyTitle: 'Results per votes percentage', partyName: 'Courant Democratique',
       nom: '', results_Percentage: '', turnout: '', blank_per: '', deputy: '', seats_num: '',
-      percentageSign: ' %', maxFilter: 60, minFilter: 0, activeFilter: false
+      percentageSign: ' %', maxFilter: 60, minFilter: 0, munFilter: 'all', activeFilter: 'none'
     }
   }
   componentWillMount() {
@@ -28,7 +28,7 @@ export default class PartyMap extends Component {
       this.setState({ grades: this.props.grades_seats, partyName: this.props.partyName });
     }
   }
-  
+
   componentWillReceiveProps(nextProps) {
     console.log('nextProps', nextProps, 'this.state.party_name: ', this.state.party_name);
     // this is done so that  whenever user changes the select option We reset all properties to initial
@@ -37,20 +37,34 @@ export default class PartyMap extends Component {
       console.log('extProps.grades_votes', nextProps.grades_votes);
       this.setState({
         partyName: nextProps.partyName, keyTitle: this.state.keyTitle, keyTitle: 'Results per votes percentage',
-        grades: nextProps.grades_votes, checked: [true, false],minFilter:0,maxFilter:60,activeFilter: false
+        grades: nextProps.grades_votes, checked: [true, false], minFilter: 0, maxFilter: 60, munFilter: 'all', activeFilter: 'none'
       });
     }
   }
 
-  getColorRegElg(d, c1, grades) {
+  getColorRegElg(d, c1, grades,state) {
     //if active filter is true then user has changed values in the input so we do special Style
-    if (this.state.activeFilter == true) {
-      if (d<this.state.minFilter||d>this.state.maxFilter) { return '#F2F2F0'}
+
+    //if filter is "result" then we filter according to the min and max filter values
+    if (this.state.activeFilter == 'result') {
+      if (d < this.state.minFilter || d > this.state.maxFilter) { return '#F2F2F0' }
       else if (d > grades[2]) { return (c1[3]); }
       else if (d > grades[1]) { return (c1[2]); }
       else if (d > grades[0]) { return (c1[0]); }
       else { return '#F2F2F0' }
-    } else {
+    }
+    //if filter is "munTypeFilter"- then we only show the mun that are new|old|extended while keeping the colors of course
+    else if (this.state.activeFilter == 'munTypeFilter') {
+      //the state from the map matches the one chosen by the use inn the select option we diliver normal color else grey
+      if (this.state.munFilter==state) {
+        if (d > grades[2]) { return (c1[3]); }
+        else if (d > grades[1]) { return (c1[2]); }
+        else if (d > grades[0]) { return (c1[0]); }
+        else { return '#F2F2F0' }
+      }else{
+        return '#F2F2F0'
+      }
+    }else  {
       if (d > grades[2]) { return (c1[3]); }
       else if (d > grades[1]) { return (c1[2]); }
       else if (d > grades[0]) { return (c1[0]); }
@@ -61,12 +75,13 @@ export default class PartyMap extends Component {
 
   style(feature) {
     const property = feature.properties;
-
+    
     // if the radio button filter is per result paint the map selon a certain prop Sinon paint selon another property
     if (this.state.filter == 'perVotes') {
       let PROPERTY = parseInt(property.votes_obtenus * 100 / property.total_votes_valide);
+      let STATE = property.state;
       return {
-        fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.state.grades),
+        fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.state.grades,STATE),
         weight: 1.2,
         opacity: 0.9,
         color: 'grey',
@@ -75,8 +90,10 @@ export default class PartyMap extends Component {
       }
     } else if (this.state.filter == 'perSeats') {
       let PROPERTY = parseInt(property.sieges_obtenus);
+      let STATE = property.state;
+
       return {
-        fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.state.grades),
+        fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.state.grades,STATE),
         weight: 1.2,
         opacity: 0.9,
         color: 'grey',
@@ -106,13 +123,16 @@ export default class PartyMap extends Component {
     const blank_per = (property.votes_blancs * 100 / property.total_votes).toFixed(2);
     const results_Percentage = (property.votes_obtenus * 100 / property.total_votes_valide).toFixed(2);
     const seats_per = (property.sieges_obtenus * 100 / property.chair).toFixed(2);
-    const seats_num = property.sieges_obtenus
+    const seats_num = property.sieges_obtenus;
+    const state = property.state;
+    const deputy = property.deputy;
     this.setState({
       nom: property.NAME_EN, destroy: false, deputy: property.deputy, nom_gov: property.GOV_EN,
       turnout: isNaN(turnout) ? 'None' : turnout + ' %',
       blank_per: isNaN(blank_per) ? 'None' : blank_per + ' %',
       results_Percentage: isNaN(results_Percentage) ? 'None' : results_Percentage + ' %'
-      , seats_num: (isNaN(seats_num) || seats_num == undefined) ? 'None' : seats_num,
+      ,seats_num: (isNaN(seats_num) || seats_num == undefined) ? 'None' : seats_num,
+      state,deputy
     });
     return layer.setStyle({
       weight: 5,
@@ -134,21 +154,31 @@ export default class PartyMap extends Component {
     let checked = [false, false];
     checked[parseInt(e.target.value)] = true;
     //when user clicks on the radiobutton we update the mapkey,grades and set back the filter values to default
-    this.setState({ filter, checked, activeFilter: false });
+    this.setState({ filter, checked, activeFilter: 'none' });
     if (filter == 'perVotes') {
-      this.setState({ grades: this.props.grades_votes, keyTitle: 'Results per votes percentage', percentageSign: ' %',minFilter:0,maxFilter:60 });
+      this.setState({ grades: this.props.grades_votes, keyTitle: 'Results per votes percentage', percentageSign: ' %', minFilter: 0, maxFilter: 60, munFilter: 'all', activeFilter: 'none' });
     } else if (filter == 'perSeats') {
-      this.setState({ grades: this.props.grades_seats, keyTitle: 'Results per seats number', percentageSign: '',minFilter:0,maxFilter:60 });
+      this.setState({ grades: this.props.grades_seats, keyTitle: 'Results per seats number', percentageSign: '', minFilter: 0, maxFilter: 60, munFilter: 'all', activeFilter: 'none' });
     }
 
 
   }
   //if active filter is true then user has changed values in the input and then style should be adapted accordingly 
   handleMaxFilter(e) {
-    this.setState({ maxFilter: e.target.value, activeFilter: true });
+    this.setState({ maxFilter: e.target.value, activeFilter: 'result',munFilter: 'all' });
   }
   handleMinFilter(e) {
-    this.setState({ minFilter: e.target.value, activeFilter: true });
+    this.setState({ minFilter: e.target.value, activeFilter: 'result',munFilter: 'all' });
+  }
+  handleMunType(e) {
+    console.log(e.target.value);
+    // if the filter value is all we act as the filter don't exist 
+    if (e.target.value=='all') {
+      this.setState({activeFilter:'result'});
+    }else{
+      this.setState({ munFilter: e.target.value, activeFilter: 'munTypeFilter',minFilter: 0, maxFilter: 60 });
+  }
+
   }
   render() {
     // console.log(dataSport);
@@ -163,7 +193,7 @@ export default class PartyMap extends Component {
     const LOADING = <Translate type='text' content='map.loading' />//Loading Map
     return (
       <div className="topMap">
-        {this.state.shapeIsLoaded ? <Map maxZoom={9} center={[34.79, 10.18]} scrollWheelZoom={false} zoom={7} minZoom={5} style={{ height: "95vh", width: "100%", position: "relative" }}>
+        {this.state.shapeIsLoaded ? <Map maxZoom={9} center={[34.79, 9.5]} scrollWheelZoom={false} zoom={7} minZoom={5} style={{ height: "95vh", width: "100%", position: "relative" }}>
           <TileLayer
             url='https://api.mapbox.com/styles/v1/hunter-x/cixhpey8700q12pnwg584603g/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA'
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> '
@@ -186,6 +216,8 @@ export default class PartyMap extends Component {
                 {this.state.filter == 'perVotes' ? <h4>{VOTES_PER} : {this.state.results_Percentage} </h4> : <h4>{SEATS_NUMBER} : {this.state.seats_num} </h4>}
                 <h4>{BLANKVOTES} : {(this.state.blank_per)} </h4>
                 <h4>{TURNOUT} : {(this.state.turnout)} </h4>
+                <h4>state : {(this.state.state)} </h4>
+                <h4>deputy : {(this.state.deputy)} </h4>
               </div>
             </Tooltip>
           </GeoJSON>
@@ -219,11 +251,25 @@ export default class PartyMap extends Component {
                 </section>
 
                 <section className='row col-md-12 '  >
-                  <p style={{ color: '#000' }} >Filter Results between : </p>
-                  <input type="number" onChange={this.handleMinFilter.bind(this)} value={this.state.minFilter} min={0} className='filterResultInput' /> &nbsp; && &nbsp;
-                <input type="number" onChange={this.handleMaxFilter.bind(this)} value={this.state.maxFilter} min={1} className='filterResultInput' />
-
+                  <p style={{ color: '#000' }} >Filter result between : </p>
+                  <input type="number" onChange={this.handleMinFilter.bind(this)} value={this.state.minFilter} min={0} className='filterResultInput' />{this.state.percentageSign}
+                  &nbsp;&nbsp; <span style={{ color: 'red' }}> &</span> &nbsp;
+                  <input type="number" onChange={this.handleMaxFilter.bind(this)} value={this.state.maxFilter} min={1} className='filterResultInput' />{this.state.percentageSign}
                 </section>
+
+                <section className='row col-md-12 '  >
+                  <p style={{ color: '#000' }} >Filter result per Mun. Type  : </p>
+                  <FormGroup controlId="typeOfAssoc" onChange={this.handleMunType.bind(this)}  >
+                    <FormControl componentClass="select" placeholder="All" value={this.state.munFilter} >
+                      <option value="" disabled >Select</option>
+                      <option value="all">All </option>
+                      <option value="new">New</option>
+                      <option value="extended">Extended </option>
+                      <option value="old">Old </option>
+                    </FormControl>
+                  </FormGroup>
+                </section>
+
               </div>
             </div>
           </Control>

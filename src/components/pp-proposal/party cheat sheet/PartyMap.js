@@ -15,20 +15,23 @@ export default class PartyMap extends Component {
     this.state = {
       shapeIsLoaded: true, shape: config.initShape, key: 1,
       filter: 'govLevel', checked: [true, false],
-      grades: [0, 34, 38], keyTitle: 'Turnout Percentage',
-      nom: '', blank: '', nulled: '', turnout: '',
+      grades: [0, 34, 38], keyTitle: 'Results per votes percentage',
+      nom: '', results_Percentage: '', turnout: '', blank_per: '', deputy: '', seats: ''
     }
   }
 
-  getColorRegElg(d, c1) {
-    //console.log(d, c1, grades);
-    if (d == 'yes') { return (c1[0]); }
-    else { return (c1[1]); }
+  getColorRegElg(d, c1, grades) {
+    if (d > grades[2]) { return (c1[3]); }
+    else if (d > grades[1]) { return (c1[2]); }
+    else if (d > grades[0]) { return (c1[0]); }
+    else { return '#F2F2F0' }
   }
 
   style(feature) {
+    let PROPERTY = parseInt(feature.properties.votes_obtenus * 100 / feature.properties.total_votes_valide);
+    //console.log(PROPERTY);
     return {
-      fillColor: this.getColorRegElg(feature.properties.tadeem, ['#6BD6C5', '#FFD8BB']),
+      fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.props.grades),
       weight: 1.2,
       opacity: 0.9,
       color: 'grey',
@@ -50,9 +53,18 @@ export default class PartyMap extends Component {
   highlightFeature(e) {
     const layer = e.target;
     const property = e.target.feature.properties;
-    console.log(property);
+
+    const turnout = (property.total_votes * 100 / property.allreg_sum).toFixed(2);
+    const blank_per = (property.votes_blancs * 100 / property.total_votes).toFixed(2);
+    const results_Percentage = (property.votes_obtenus * 100 / property.total_votes_valide).toFixed(2);
+   /*  const seats_per = (property.seats * 100 / property.chair).toFixed(2);
+    const seats_num = property.seats */
     this.setState({
-      nom: property.NAME_EN, destroy: false, blank: property.blank_votes_per  , nulled: property.null_votes_per , turnout: (property.turnout).toFixed(2)
+      nom: property.NAME_EN, destroy: false, deputy: property.deputy,
+      turnout: isNaN(turnout) ? 'None' : turnout+' %',
+      blank_per: isNaN(blank_per) ? 'None' : blank_per+' %',
+      results_Percentage: isNaN(results_Percentage) ? 'None' : results_Percentage+' %'
+      /* ,seats: isNaN(seats_num) ? 'None' : seats_num, */
     });
     return layer.setStyle({
       weight: 5,
@@ -72,7 +84,8 @@ export default class PartyMap extends Component {
 
   render() {
     // console.log(dataSport);
-    const TURNOUT = <Translate type='text' content='MunTurnoutMap.TURNOUT' />//TURNOUT
+    const VOTES_PER = <Translate type='text' content='partySheet.VOTES_PER' />//votes percentage 
+    const TURNOUT = <Translate type='text' content='MunTurnoutMap.TURNOUT' />//Turnout
     const BLANKVOTES = <Translate type='text' content='tadeemMap.BLANKVOTES' />//Blank Votes
     const NULLVOTES = <Translate type='text' content='tadeemMap.NULLVOTES' />//Null votes
 
@@ -80,15 +93,15 @@ export default class PartyMap extends Component {
     const LOADING = <Translate type='text' content='map.loading' />//Loading Map
     return (
       <div className="topMap">
-      {this.state.shapeIsLoaded ? <Map maxZoom={9} center={[34.79, 10.18]} scrollWheelZoom={false} zoom={7} minZoom={5} style={{ height: "95vh", width: "100%", position: "relative" }}>
+        {this.state.shapeIsLoaded ? <Map maxZoom={9} center={[34.79, 10.18]} scrollWheelZoom={false} zoom={7} minZoom={5} style={{ height: "95vh", width: "100%", position: "relative" }}>
           <TileLayer
             url='https://api.mapbox.com/styles/v1/hunter-x/cixhpey8700q12pnwg584603g/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA'
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> '
           />
 
           <GeoJSON
-            key={"a" + this.state.filter}
-            data={G_Tadeem}
+            key={this.props.shapeToSelect}
+            data={window[this.props.shapeToSelect]}
             style={this.style.bind(this)}
             onEachFeature={
               (feature, layer) => {
@@ -100,32 +113,30 @@ export default class PartyMap extends Component {
             <Tooltip direction="bottom" className="leafletTooltip" sticky={true} >
               <div>
                 <h3 style={{ textAlign: 'center' }}>{this.state.nom}</h3>
-                <h4>{TURNOUT} : {this.state.turnout} %</h4>
-                <h4>{BLANKVOTES} : {(this.state.blank)} %</h4>
-                <h4>{NULLVOTES} : {(this.state.nulled)} %</h4>
-              </div> 
+                <h4>{VOTES_PER} : {this.state.results_Percentage} </h4>
+                <h4>{BLANKVOTES} : {(this.state.blank_per)} </h4>
+                <h4>{TURNOUT} : {(this.state.turnout)} </h4>
+              </div>
             </Tooltip>
           </GeoJSON>
 
           <GeoJSON
-            key={"b" + this.state.filter}
             data={G_munElec_gov}
             style={this.styleGovLimiter.bind(this)}
-
           />
 
           <Control position="topright" >
             <h5>{HOVER}</h5>
           </Control>
           <Control position="bottomright" >
-            <MapKey grades={this.state.grades} colorSet={["#ffffcc", "#c2e699", "#78c679", "#238443"]} keyTitle={this.state.keyTitle} key={this.state.filter} />
+            <MapKey grades={this.props.grades} colorSet={["#ffffcc", "#c2e699", "#78c679", "#238443"]} keyTitle={this.state.keyTitle} key={this.state.filter} />
           </Control>
           <Control position="topleft"  >
-          <div className="col-lg-12 col-sm-2 col-sm-offset-2 col-lg-offset-1">
-          <div className="well MenuShadow SideMenuePosition info-card-font">
-             <h6 className='center'>Control the map</h6>
-          </div>
-          </div>
+            <div className="col-lg-12 col-sm-2 col-sm-offset-2 col-lg-offset-1">
+              <div className="well MenuShadow SideMenuePosition info-card-font">
+                <h6 className='center'>Control the map</h6>
+              </div>
+            </div>
           </Control>
 
         </Map> :
@@ -138,10 +149,10 @@ export default class PartyMap extends Component {
               </div>
             </div>
           </div>
-          
+
         }
-        </div>
-    
+      </div>
+
     );
   }
 }

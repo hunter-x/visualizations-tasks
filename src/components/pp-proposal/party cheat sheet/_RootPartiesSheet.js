@@ -12,6 +12,7 @@ export default class _RootTadeem extends Component {
     super(props);
     this.state = {
       VOTES_value: '75586 - 4,2%', CHAIRS_value: '206 - 2,8%', BEST_RES_value: '6/12 (Jemna)', RUNNED_MUN_value: '69/350', Party_name: 'Courant Democratique'
+      ,shapeToSelect:'G_TAYAR_PARTY',grades:[0, 10, 20]
     }
   }
 
@@ -29,9 +30,12 @@ export default class _RootTadeem extends Component {
     }).call(this);
   }
   handleNgoSector(e) {
+    /* Each object in the select drawer contains values separated by **  that we parse, pass into state and then consume in the render  */
+    /* grades variable contains 2 grades one for the chair results and the other for the results per votes that wee parse in the party map according to the radio button */
     const dataString = e.target.value.split("**");
     this.setState({
       VOTES_value: dataString[0], CHAIRS_value: dataString[1], BEST_RES_value: dataString[2], RUNNED_MUN_value: dataString[3], Party_name: dataString[4]
+      ,shapeToSelect:dataString[5],grades:JSON.parse(dataString[6])
     });
   }
   render() {
@@ -40,7 +44,8 @@ export default class _RootTadeem extends Component {
     const CHAIRS = <Translate type='text' content='partySheet.CHAIRS' />//Total chairs
     const BEST_RES = <Translate type='text' content='partySheet.BEST_RES' />//Highest seats number
     const RUNNED_MUN = <Translate type='text' content='partySheet.RUNNED_MUN' />//Runned municipalities
-    const { VOTES_value,CHAIRS_value,BEST_RES_value,RUNNED_MUN_value,Party_name}=this.state;
+    const { VOTES_value,CHAIRS_value,BEST_RES_value,RUNNED_MUN_value,Party_name,shapeToSelect,grades}=this.state;
+    console.log(this.state.grades);
     return (
       <div>
         <Nav />
@@ -57,8 +62,8 @@ export default class _RootTadeem extends Component {
                 <FormGroup controlId="typeOfAssoc" onChange={this.handleNgoSector.bind(this)}  >
                   <FormControl componentClass="select" placeholder="All" defaultValue={0}>
                     <option value="" disabled >Select</option>
-                    <option value="75586 - 4,2%**206 - 2,8%**6/12 (Jemna)**69/350**Courant Democratique">Courant Democratique </option>
-                    <option value="19116 - 1%**93 - 1,3%**5/12 (El Hbabsa)**43/350**Afek Tounes">Afek Tounes </option>
+                    <option value="75586 - 4,2%**206 - 2,8%**6/12 (Jemna)**69/350**Courant Democratique**G_TAYAR_PARTY**[0, 9, 20]">Courant Democratique </option>
+                    <option value="19116 - 1%**93 - 1,3%**5/12 (El Hbabsa)**43/350**Afek Tounes**G_AFEK_PARTY**[0, 7, 20]">Afek Tounes </option>
                   </FormControl>
                 </FormGroup>
               </div>
@@ -90,7 +95,7 @@ export default class _RootTadeem extends Component {
                 </div>
               </div>
             </div>
-            <PartyMap />
+            <PartyMap shapeToSelect={shapeToSelect} grades={grades} />
           </section>
 
         </div>

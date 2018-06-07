@@ -1,4 +1,10 @@
 module.exports = {
+    partySheet:{
+        VOTES:'Total Votes',
+        CHAIRS:'Total seats',
+        BEST_RES:'Best result',
+        RUNNED_MUN:'Runned municipalities',       
+    },
     tadeemMap:{
         BLANKVOTES:'Blank Votes',
         NULLVOTES:'Null votes',
@@ -50,6 +56,8 @@ module.exports = {
         description2: 'Number of CSOs & their domain of activity -\xa0\xa0\xa0\xa0\xa0\xa0\xa0 By governorate. Data collected on 26-05-18.',
         title3: 'Tadeem Project ',
         description3: 'Municipalities where the Tadeem project operates + info about turnout, null & blank votes.',
+        title4: 'cheat sheet',
+        description4: 'statistics about parties, their participation in the local election and beyond .',
         
     },
     home: {

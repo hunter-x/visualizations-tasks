@@ -8,6 +8,12 @@ import PartyMap from './PartyMap';
 import './partySheet.css'
 export default class _RootTadeem extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      VOTES_value: '75586 - 4,2%', CHAIRS_value: '206 - 2,8%', BEST_RES_value: '6/12 (Jemna)', RUNNED_MUN_value: '69/350', Party_name: 'Courant Democratique'
+    }
+  }
 
   componentDidMount() {
     (function () {
@@ -23,21 +29,27 @@ export default class _RootTadeem extends Component {
     }).call(this);
   }
   handleNgoSector(e) {
-    console.log(e.target.value);
+    const dataString = e.target.value.split("**");
+    this.setState({
+      VOTES_value: dataString[0], CHAIRS_value: dataString[1], BEST_RES_value: dataString[2], RUNNED_MUN_value: dataString[3], Party_name: dataString[4]
+    });
   }
   render() {
     const TITLE = <Translate type='text' content='ppproposal.title4' />//Party\'s cheat sheet
+    const VOTES = <Translate type='text' content='partySheet.VOTES' />//Total Votes
+    const CHAIRS = <Translate type='text' content='partySheet.CHAIRS' />//Total chairs
+    const BEST_RES = <Translate type='text' content='partySheet.BEST_RES' />//Highest seats number
+    const RUNNED_MUN = <Translate type='text' content='partySheet.RUNNED_MUN' />//Runned municipalities
+    const { VOTES_value,CHAIRS_value,BEST_RES_value,RUNNED_MUN_value,Party_name}=this.state;
     return (
       <div>
         <Nav />
 
-        
-
-          <div id="content">
+        <div id="content">
           <section >
             <div className="menu-trigger"></div>
             <div className="site-content">
-              <h1 className="site-content__headline">Courant Democratique {TITLE}</h1>
+              <h1 className="site-content__headline">{Party_name} {TITLE}</h1>
             </div>
             <div className="col-md-offset-2 col-md-10">
               <h4 className="subheaderTitle col-md-4 "> Please select the political party :</h4>
@@ -45,8 +57,8 @@ export default class _RootTadeem extends Component {
                 <FormGroup controlId="typeOfAssoc" onChange={this.handleNgoSector.bind(this)}  >
                   <FormControl componentClass="select" placeholder="All" defaultValue={0}>
                     <option value="" disabled >Select</option>
-                    <option value="sum-[500, 900, 1200]/20954">Courant Democratique </option>
-                    <option value="sum-[500, 900, 1200]/20954">Afek Tounes </option>
+                    <option value="75586 - 4,2%**206 - 2,8%**6/12 (Jemna)**69/350**Courant Democratique">Courant Democratique </option>
+                    <option value="19116 - 1%**93 - 1,3%**5/12 (El Hbabsa)**43/350**Afek Tounes">Afek Tounes </option>
                   </FormControl>
                 </FormGroup>
               </div>
@@ -57,34 +69,34 @@ export default class _RootTadeem extends Component {
                 <div className="row m-space">
                   <div className="col-md-3 col-xs-6 info-card-font">
                     <i className="ion-ios-analytics-outline"></i>
-                    <h2>26,000</h2>
-                    <p>Visitors Daily</p>
+                    <h2>{VOTES_value} </h2>
+                    <p>{VOTES}</p>
                   </div>
                   <div className="col-md-3 col-xs-6 info-card-font">
                     <i className="ion-ios-lightbulb-outline"></i>
-                    <h2>10,000</h2>
-                    <p>Fresh Ideas Daily</p>
+                    <h2>{CHAIRS_value}</h2>
+                    <p>{CHAIRS}</p>
                   </div>
                   <div className="col-md-3 col-xs-6 info-card-font">
                     <i className="ion-ios-camera-outline"></i>
-                    <h2>17,500</h2>
-                    <p>Cat Photos</p>
+                    <h2>{BEST_RES_value}</h2>
+                    <p>{BEST_RES}</p>
                   </div>
                   <div className="col-md-3 col-xs-6 info-card-font">
                     <i className="ion-ios-briefcase-outline"></i>
-                    <h2>73</h2>
-                    <p>Current Partners</p>
+                    <h2>{RUNNED_MUN_value}</h2>
+                    <p> {RUNNED_MUN}</p>
                   </div>
                 </div>
               </div>
             </div>
             <PartyMap />
-            </section>
-            
-          </div>
-         
+          </section>
 
-        
+        </div>
+
+
+
       </div>
     );
   }

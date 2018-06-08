@@ -12,7 +12,7 @@ export default class _RootTadeem extends Component {
     super(props);
     this.state = {
       VOTES_value: '517077 - 28,6%', CHAIRS_value: '2146 - 29,7%', BEST_RES_value: '17/24 (Ghannouch-Gabes)', RUNNED_MUN_value: '350/350', partyName: 'Ennahdha'
-      ,shapeToSelect:'G_NAHDHA_PARTY',grades_votes:[0, 20, 30],grades_seats:[0,10,15],shapeType:'normalShape'
+      ,shapeToSelect:'G_NAHDHA_PARTY',grades_votes:[0, 20, 30],grades_seats:[0,4,8],shapeType:'normalShape'
     }
   }
 
@@ -67,11 +67,11 @@ export default class _RootTadeem extends Component {
                 <FormGroup controlId="typeOfAssoc" onChange={this.handleNgoSector.bind(this)}  >
                   <FormControl componentClass="select" placeholder="All" defaultValue={0}>
                     <option value="" disabled >Select</option>
-                    <option value="517077 - 28,6%**2146 - 29,7%**17/24 (Ghannouch-Gabes)**350/350**Ennahdha**G_NAHDHA_PARTY**[0, 20, 30]**[0,10,15]**40">Ennahdha</option>
-                    <option value="376945 - 20,8%**1593 - 22,0%**13/18(Khmeyria-Jendouba)**345/350**Nidaa Tounes**G_NIDA_PARTY**[0, 20, 30]**[0,10,15]**40">Nidaa Tounes</option>
-                    <option value="75586 - 4,1%**205 - 2,8%**6/12 (Jemna-Kebili)**69/350**Courant Democratique**G_TAYAR_PARTY**[0, 9, 20]**[0,2,4]**50">Courant Democratique </option>
-                    <option value="26014 - 1,4%**123 - 1,7%**8/18 (Souk Essebt-Jendouba)**69/350**Machrouu Tounes**G_MASHROU_PARTY**[0, 9, 20]**[0,1,4]**40">Machrouu Tounes</option>
-                    <option value="24928 - 1,3%**75 - 1,0%**7/24 (Siliana)**31/350**Parti Destourien Libre**G_DOSSTOURI_PARTY**[0, 9, 20]**[0,1,4]**40"> Parti Destourien Libre</option>
+                    <option value="517077 - 28,6%**2146 - 29,7%**17/24 (Ghannouch-Gabes)**350/350**Ennahdha**G_NAHDHA_PARTY**[0, 20, 30]**[0,4,8]**40">Ennahdha</option>
+                    <option value="376945 - 20,8%**1593 - 22,0%**13/18(Khmeyria-Jendouba)**345/350**Nidaa Tounes**G_NIDA_PARTY**[0, 20, 30]**[0,4,8]**40">Nidaa Tounes</option>
+                    <option value="75586 - 4,1%**205 - 2,8%**6/12 (Jemna-Kebili)**69/350**Courant Democratique**G_TAYAR_PARTY**[0, 9, 20]**[0,2,3]**50">Courant Democratique </option>
+                    <option value="26014 - 1,4%**123 - 1,7%**8/18 (Souk Essebt-Jendouba)**69/350**Machrouu Tounes**G_MASHROU_PARTY**[0, 9, 20]**[0,2,3]**40">Machrouu Tounes</option>
+                    <option value="24928 - 1,3%**75 - 1,0%**7/24 (Siliana)**31/350**Parti Destourien Libre**G_DOSSTOURI_PARTY**[0, 9, 20]**[0,2,3]**40"> Parti Destourien Libre</option>
                     <option value="23998 - 1,3%**84 - 1,1%**4/12 (El Golaa-Kebili)**46/350**AL IRADA**G_IRADA_PARTY**[0, 9, 20]**[0,1,4]**40"> AL IRADA</option>
                     <option value="23958 - 1,3%**100 - 1,3%**8/18 (Souk El Ahed-Kebili)**40/350**Mouvement Du Peuple**G_HARAK_PARTY**[0, 9, 20]**[0,1,4]**40">Mouvement Du Peuple</option>
                     <option value="19116 - 1,0%**94 - 1,3%**5/12 (El Hbabsa-Siliana)**43/350**Afek Tounes**G_AFEK_PARTY**[0, 9, 20]**[0,1,4]**40">Afek Tounes</option>

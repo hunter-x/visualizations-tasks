@@ -18,10 +18,11 @@ export default class PartyMap extends Component {
       filter: 'perVotes', checked: [true, false],
       keyTitle: 'Results per votes percentage', partyName: 'Ennahdha',
       nom: '', results_Percentage: '', turnout: '', blank_per: '', deputy: '', seats_num: '',
-      percentageSign: ' %', maxFilter: 60, minFilter: 0, munFilter: 'all', activeFilter: 'none'
+      percentageSign: ' %', maxFilter: 60, minFilter: 0, munFilter: 'all', activeFilter: 'none',grades:[]
     }
   }
   componentWillMount() {
+    console.log('WIL MOUNT');
     //don't know why did this cause u can use props directly ????
     if (this.state.filter == 'perVotes') {
       this.setState({ grades: this.props.grades_votes, partyName: this.props.partyName });
@@ -31,13 +32,13 @@ export default class PartyMap extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps', nextProps, 'this.state.party_name: ', this.state.party_name);
+    console.log('nextProps', nextProps, 'this.state.partyName: ', this.state.partyName);
     // this is done so that  whenever user changes the select option We reset all properties to initial
     //we also set back the filter values to default 
     if (nextProps.partyName != this.state.partyName) {
-      console.log('extProps.grades_votes', nextProps.grades_votes);
+      console.log('nnnnextProps.grades_votes', nextProps.grades_votes);
       this.setState({
-        partyName: nextProps.partyName, keyTitle: this.state.keyTitle, keyTitle: 'Results per votes percentage',
+        partyName: nextProps.partyName, keyTitle: this.state.keyTitle, keyTitle: 'Results per votes percentage',filter:'perVotes',
         grades: nextProps.grades_votes, checked: [true, false], minFilter: 0, maxFilter: 60, munFilter: 'all', activeFilter: 'none'
       });
     }
@@ -68,7 +69,7 @@ export default class PartyMap extends Component {
         return '#F2F2F0'
       }
     } else {
-      console.log(AssociatedParty,' || ',this.props.partyName);
+      //console.log(AssociatedParty,' || ',this.props.partyName);
       if (this.props.partyName!=AssociatedParty) {
         return '#F2F2F0'
       }
@@ -219,7 +220,7 @@ export default class PartyMap extends Component {
           />
 
           <GeoJSON
-            key={this.props.shapeToSelect}
+            key={this.props.shapeToSelect+this.props.grades}
             data={window[this.props.shapeToSelect]}
             style={this.style.bind(this)}
             onEachFeature={

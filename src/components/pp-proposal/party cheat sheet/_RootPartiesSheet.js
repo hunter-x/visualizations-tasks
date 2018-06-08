@@ -35,11 +35,11 @@ export default class _RootTadeem extends Component {
     /* grades variable contains 2 grades one for the chair results and the other for the results per votes that wee parse in the party map according to the radio button */
     const dataString = e.target.value.split("**");
     //we check if the party is within a mixed shape to color specefically in the map
-    let shapeType='normalShape';
-    dataString[8]=='mixed'?shapeType='mixed':'normalShape';
+    /* let shapeType='normalShape';
+    dataString[8]=='mixed'?shapeType='mixed':'normalShape'; */
     this.setState({
       VOTES_value: dataString[0], CHAIRS_value: dataString[1], BEST_RES_value: dataString[2], RUNNED_MUN_value: dataString[3], partyName: dataString[4]
-      ,shapeToSelect:dataString[5],grades_votes:JSON.parse(dataString[6]),grades_seats:JSON.parse(dataString[7]),shapeType
+      ,shapeToSelect:dataString[5],grades_votes:JSON.parse(dataString[6]),grades_seats:JSON.parse(dataString[7])
     });
   }
   
@@ -49,7 +49,7 @@ export default class _RootTadeem extends Component {
     const CHAIRS = <Translate type='text' content='partySheet.CHAIRS' />//Total chairs
     const BEST_RES = <Translate type='text' content='partySheet.BEST_RES' />//Highest seats number
     const RUNNED_MUN = <Translate type='text' content='partySheet.RUNNED_MUN' />//Runned municipalities
-    const { VOTES_value,CHAIRS_value,BEST_RES_value,RUNNED_MUN_value,partyName,shapeToSelect,grades_votes,grades_seats,shapeType}=this.state;
+    const { VOTES_value,CHAIRS_value,BEST_RES_value,RUNNED_MUN_value,partyName,shapeToSelect,grades_votes,grades_seats}=this.state;
     return (
       <div>
         <Nav />
@@ -66,11 +66,28 @@ export default class _RootTadeem extends Component {
                 <FormGroup controlId="typeOfAssoc" onChange={this.handleNgoSector.bind(this)}  >
                   <FormControl componentClass="select" placeholder="All" defaultValue={0}>
                     <option value="" disabled >Select</option>
-                    <option value="75586 - 4,2%**206 - 2,8%**6/12 (Jemna-Kebili)**69/350**Courant Democratique**G_TAYAR_PARTY**[0, 9, 20]**[0,2,4]**50">Courant Democratique </option>
-                    <option value="19116 - 1%**93 - 1,3%**5/12 (El Hbabsa-Siliana)**43/350**Afek Tounes**G_AFEK_PARTY**[0, 7, 20]**[0,1,4]**40">Afek Tounes </option>
-                    <option value="19116 - 1%**93 - 1,3%**5/12 (El Hbabsa-Siliana)**43/350**L'Initiative**G_PARTIES_P_ONE**[0, 7, 20]**[0,1,4]**40**mixed">L'Initiative</option>
-                    <option value="19116 - 1%**93 - 1,3%**5/12 (El Hbabsa-Siliana)**43/350**Beni Watani**G_PARTIES_P_ONE**[0, 7, 20]**[0,1,4]**40**mixed">Beni Watani </option>
-                    <option value="19116 - 1%**93 - 1,3%**5/12 (El Hbabsa-Siliana)**43/350**El Binaa Al Watani**G_PARTIES_P_TWO**[0, 7, 20]**[0,1,4]**40**mixed">El Binaa Al Watani</option>
+                    <option value="517077 - 28,6%**2146 - 29,7%**17/24 (Ghannouch-Gabes)**350/350**Ennahdha**G_NAHDHA_PARTY**[0, 9, 20]**[0,6,12]**40">Ennahdha</option>
+                    <option value="376945 - 20,8%**1593 - 22,0%**13/18(Khmeyria-Jendouba)**345/350**L'Initiative**Nidaa Tounes**[0, 9, 20]**[0,5,10]**40">Nidaa Tounes</option>
+                    <option value="75586 - 4,1%**205 - 2,8%**6/12 (Jemna-Kebili)**69/350**Courant Democratique**G_TAYAR_PARTY**[0, 9, 20]**[0,2,4]**50">Courant Democratique </option>
+                    <option value="26014 - 1,4%**123 - 1,7%**8/18 (Souk Essebt-Jendouba)**69/350**Machrouu Tounes**G_MASHROU_PARTY**[0, 9, 20]**[0,1,4]**40">Machrouu Tounes</option>
+                    <option value="24928 - 1,3%**75 - 1,0%**7/24 (Siliana)**31/350**Parti Destourien Libre**G_DOSSTOURI_PARTY**[0, 9, 20]**[0,1,4]**40"> Parti Destourien Libre</option>
+                    <option value="23998 - 1,3%**84 - 1,1%**4/12 (El Golaa-Kebili)**46/350**AL IRADA**G_IRADA_PARTY**[0, 9, 20]**[0,1,4]**40"> AL IRADA</option>
+                    <option value="23958 - 1,3%**100 - 1,3%**8/18 (Souk El Ahed-Kebili)**40/350**Mouvement Du Peuple**G_HARAK_PARTY**[0, 9, 20]**[0,1,4]**40">Mouvement Du Peuple</option>
+                    <option value="19116 - 1,0%**94 - 1,3%**5/12 (El Hbabsa-Siliana)**43/350**Afek Tounes**G_AFEK_PARTY**[0, 9, 20]**[0,1,4]**40">Afek Tounes</option>
+                    <option value="9097 - 0,5%**15 - 0,2%**2/18 (Ksibet Thrayet-Sousse)**9/350**Beni Watani**G_PARTIES_P_TWO**[0, 5, 15]**[0,1,4]**40">Beni Watani</option>
+                    <option value="6405 - 0,3%**24 - 0,3%**6/24 (Hammam-Sousse)**7/350**L'Initiative**G_PARTIES_P_TWO**[0, 5, 15]**[0,1,4]**40">L'Initiative</option>
+                    <option value="4206 - 0,2%**5 - 0,06%**2/18 (Ghraiba-Sfax)**15/350**El Binaa Al Watani**G_PARTIES_P_ONE**[0, 5, 15]**[0,1,4]**40">El Binaa Al Watani</option>
+                    <option value="3376 - 0,1%**14 - 0,1%**4/18 (Rahal-Sidi Bouzid)**12/350**Parti Socialiste**G_PARTIES_P_TWO**[0, 5, 15]**[0,1,4]**40">Parti Socialiste</option>
+                    <option value="2752 - 0,1%**7 - 0,09%**4/18 (Zaouia Sousse)**6/350**Union Populaire Républicaine**G_PARTIES_P_TWO**[0, 5, 15]**[0,1,4]**40">Union Populaire Républicaine</option>
+                    <option value="1145 - 0,06%**6 - 0,08%**3/18 (Carthage)**2/350**Ajyal**G_PARTIES_P_TWO**[0, 5, 15]**[0,1,4]**40">Ajyal</option>
+                    <option value="1041 - 0,05%**3 - 0,04%**3/36 (Bizerte)**2/350**Sawt Ettounsi**G_PARTIES_P_ONE**[0, 5, 15]**[0,1,4]**40"> Sawt Ettounsi</option>
+                    <option value="733 - 0,04%**3 - 0,04%**5/12 (Foussana)**1/350**Mouvement Démocrate**G_PARTIES_P_ONE**[0, 1, 2]**[0,1,4]**40">Mouvement Démocrate</option>
+                    <option value="703 - 0,03%**2 - 0,02%**2/24 (Medenine)**1/350**Mouvement De La Lutte Patriotique**G_PARTIES_P_ONE**[0, 1, 2]**[0,1,4]**40">Mouvement De La Lutte Patriotique</option>
+                    <option value="623 - 0,03%**4 - 0,05%**1/ (El Mida-Nabeul)**3/350**La Rencontre Démocratique**G_PARTIES_P_ONE**[0, 1, 2]**[0,1,4]**40">La Rencontre Démocratique</option>
+                    <option value="301 - 0,01%**1 - 0,01%**5/12 ()**1/350**Tounes Awalan**G_PARTIES_P_ONE**[0, 1, 2]**[0,1,4]**40">Tounes Awalan</option>
+                    <option value="214 - 0,01%**1 - 0,01%**5/12 ()**1/350**Parti De L'Avenir**G_PARTIES_P_TWO**[0, 1, 2]**[0,1,4]**40">Parti De L'Avenir</option>
+                    <option value="178 - 0,009%**0 - 0%**5/12 ()**1/350**Mouvement Démocrate socialiste**G_PARTIES_P_ONE**[0, 1, 2]**[0,1,4]**40">Mouvement Démocrate socialiste</option>
+                    <option value="150 - 0,008%**1 - 0,01%**5/12 ()**1/350**Parti Des Verts Pour Le Progrès**G_PARTIES_P_ONE**[0, 1, 2]**[0,1,4]**40">Parti Des Verts Pour Le Progrès</option>
                   </FormControl>
                 </FormGroup>
               </div>
@@ -102,7 +119,7 @@ export default class _RootTadeem extends Component {
                 </div>
               </div>
             </div>
-            <PartyMap shapeToSelect={shapeToSelect} grades_votes={grades_votes} grades_seats={grades_seats} partyName={partyName} shapeType={shapeType}/>
+            <PartyMap shapeToSelect={shapeToSelect} grades_votes={grades_votes} grades_seats={grades_seats} partyName={partyName} />
           </section>
 
         </div>

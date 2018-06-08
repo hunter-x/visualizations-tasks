@@ -45,13 +45,9 @@ export default class PartyMap extends Component {
 
   getColorRegElg(d, c1, grades, state, AssociatedParty) {
     //if active filter is true then user has changed values in the input so we do special Style
-   /*  if (this.props.shapeType != 'normalShape') {
-      if (AssociatedParty != this.props.partyName) { return '#F2F2F0' }
-    } */
-//console.log(AssociatedParty);
+ 
     //if filter is "result" then we filter according to the min and max filter values
     if (this.state.activeFilter == 'result') {
-      console.log('res');
       if (AssociatedParty != this.props.partyName) { return '#F2F2F0' }
       else if (d < this.state.minFilter || d > this.state.maxFilter) { return '#F2F2F0' }
       else if (d > grades[2]) { return (c1[3]); }
@@ -181,7 +177,7 @@ export default class PartyMap extends Component {
     this.setState({ minFilter: e.target.value, activeFilter: 'result', munFilter: 'all' });
   }
   handleMunType(e) {
-    console.log(e.target.value);
+    //console.log(e.target.value);
     // if the filter value is all we act as the filter don't exist 
     if (e.target.value == 'all') {
       this.setState({ activeFilter: 'result' });

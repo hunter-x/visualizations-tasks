@@ -161,7 +161,6 @@ export default class PartyMap extends Component {
       this.setState({ grades: this.props.grades_seats, keyTitle: 'Results per seats number', percentageSign: '', minFilter: 0, maxFilter: 60, munFilter: 'all', activeFilter: 'none' });
     }
 
-
   }
   //if active filter is true then user has changed values in the input and then style should be adapted accordingly 
   handleMaxFilter(e) {
@@ -188,6 +187,15 @@ export default class PartyMap extends Component {
     const SEATS_NUMBER = <Translate type='text' content='partySheet.SEATS_NUMBER' />//Seats number 
     const SEAT_RES = <Translate type='text' content='partySheet.SEAT_RES' />//Results per votes
     const VOTES_RES = <Translate type='text' content='partySheet.VOTES_RES' />//Results per seats
+    
+    const ALL = <Translate type='text' content='partySheet.All' />//All
+    const OLD = <Translate type='text' content='partySheet.Old' />//Old
+    const EXTENDED = <Translate type='text' content='partySheet.extended' />//extended
+    const NEW = <Translate type='text' content='partySheet.New' />//New
+
+    const FILTER_RES = <Translate type='text' content='partySheet.filter_Result' />//Filter result between :
+    const FILTER_RES_MUN = <Translate type='text' content='partySheet.filter_Result_Mun' />//Filter result per Mun. Type  :
+    const CONTROL = <Translate type='text' content='partySheet.control_map' />//Control the map
 
     const HOVER = <Translate type='text' content='map.hover' />//Hover Over the map for more info
     const LOADING = <Translate type='text' content='map.loading' />//Loading Map
@@ -216,7 +224,7 @@ export default class PartyMap extends Component {
                 {this.state.filter == 'perVotes' ? <h4>{VOTES_PER} : {this.state.results_Percentage} </h4> : <h4>{SEATS_NUMBER} : {this.state.seats_num} </h4>}
                 <h4>{BLANKVOTES} : {(this.state.blank_per)} </h4>
                 <h4>{TURNOUT} : {(this.state.turnout)} </h4>
-                <h4>state : {(this.state.state)} </h4>
+                <h4>mun. type : {(this.state.state)} </h4>
                 <h4>deputy : {(this.state.deputy)} </h4>
               </div>
             </Tooltip>
@@ -236,7 +244,7 @@ export default class PartyMap extends Component {
           <Control position="topleft"  >
             <div className="col-lg-12 col-sm-2 col-sm-offset-2 col-lg-offset-1">
               <div className="well MenuShadow SideMenuePosition info-card-font">
-                <h6 className='center'>Control the map</h6>
+                <h6 className='center'>{CONTROL}</h6>
                 <section className='row col-md-12' >
 
                   <div className="md-radio md-radio-inline" style={{ margin: '10px 0' }}>
@@ -251,19 +259,19 @@ export default class PartyMap extends Component {
                 </section>
 
                 <section className='row col-md-12 '  >
-                  <p style={{ color: '#000' }} >Filter result between : </p>
+                  <p style={{ color: '#000' }} >{FILTER_RES} </p>
                   <input type="number" onChange={this.handleMinFilter.bind(this)} value={this.state.minFilter} min={0} className='filterResultInput' />{this.state.percentageSign}
                   &nbsp;&nbsp; <span style={{ color: 'red' }}> &</span> &nbsp;
                   <input type="number" onChange={this.handleMaxFilter.bind(this)} value={this.state.maxFilter} min={1} className='filterResultInput' />{this.state.percentageSign}
                 </section>
 
                 <section className='row col-md-12 '  >
-                  <p style={{ color: '#000' }} >Filter result per Mun. Type  : </p>
+                  <p style={{ color: '#000' }} >{FILTER_RES_MUN} </p>
                   <FormGroup controlId="typeOfAssoc" onChange={this.handleMunType.bind(this)}  >
                     <FormControl componentClass="select" placeholder="All" value={this.state.munFilter} >
                       <option value="" disabled >Select</option>
-                      <option value="all">All </option>
-                      <option value="new">New</option>
+                      <option value="all">All</option>
+                      <option value="new"> New</option>
                       <option value="extended">Extended </option>
                       <option value="old">Old </option>
                     </FormControl>

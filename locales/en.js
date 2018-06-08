@@ -7,7 +7,14 @@ module.exports = {
         VOTES_PER:'votes percentage',
         SEAT_RES:'Results per votes',
         VOTES_RES:'Results per seats',
-        SEATS_NUMBER:'Seats number'
+        SEATS_NUMBER:'Seats number',
+        All:'All',
+        Old:'Old',
+        extended:'extended',
+        New:'New',
+        filter_Result:'Filter result between :',
+        filter_Result_Mun:'Filter result per Mun. Type  :',
+        control_map:'Control the map',
     },
     tadeemMap:{
         BLANKVOTES:'Blank Votes',

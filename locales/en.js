@@ -69,6 +69,8 @@ module.exports = {
         description3: 'Municipalities where the Tadeem project operates + info about turnout, null & blank votes.',
         title4: 'cheat sheet',
         description4: 'statistics about parties, their participation in the local election and beyond .',
+        title5: 'General results Overview',
+        description5: 'Vizualizing All municipalities results per Governorate',
         
     },
     home: {

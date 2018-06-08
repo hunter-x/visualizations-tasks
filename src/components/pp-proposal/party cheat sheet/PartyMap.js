@@ -16,7 +16,7 @@ export default class PartyMap extends Component {
     this.state = {
       shapeIsLoaded: true, shape: config.initShape, key: 1,
       filter: 'perVotes', checked: [true, false],
-      keyTitle: 'Results per votes percentage', partyName: 'Courant Democratique',
+      keyTitle: 'Results per votes percentage', partyName: 'Ennahdha',
       nom: '', results_Percentage: '', turnout: '', blank_per: '', deputy: '', seats_num: '',
       percentageSign: ' %', maxFilter: 60, minFilter: 0, munFilter: 'all', activeFilter: 'none'
     }
@@ -68,7 +68,11 @@ export default class PartyMap extends Component {
         return '#F2F2F0'
       }
     } else {
-      if (AssociatedParty != this.props.partyName) { return '#F2F2F0' }
+      console.log(AssociatedParty,' || ',this.props.partyName);
+      if (this.props.partyName!=AssociatedParty) {
+        return '#F2F2F0'
+      }
+     
       else if (d > grades[2]) { return (c1[3]); }
       else if (d > grades[1]) { return (c1[2]); }
       else if (d > grades[0]) { return (c1[0]); }
@@ -85,7 +89,7 @@ export default class PartyMap extends Component {
       let PROPERTY = parseInt(property.votes_obtenus * 100 / property.total_votes_valide);
       let STATE = property.state;
       let  SHAPE_PARTY;
-      (property.nom_liste_fr!=undefined||property.nom_liste_fr!=null) ? SHAPE_PARTY =property.nom_liste_fr:SHAPE_PARTY='none';
+      (property.nom_liste_fr==undefined) ? SHAPE_PARTY = this.props.partyName:SHAPE_PARTY=property.nom_liste_fr;
       return {
         fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.state.grades, STATE, SHAPE_PARTY),
         weight: 1.2,
@@ -98,7 +102,7 @@ export default class PartyMap extends Component {
       let PROPERTY = parseInt(property.sieges_obtenus);
       let STATE = property.state;
       let  SHAPE_PARTY;
-      (property.nom_liste_fr!=undefined||property.nom_liste_fr!=null) ? SHAPE_PARTY =property.nom_liste_fr:SHAPE_PARTY='none';
+      (property.nom_liste_fr==undefined) ? SHAPE_PARTY = this.props.partyName:SHAPE_PARTY=property.nom_liste_fr;
       return {
         fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.state.grades, STATE, SHAPE_PARTY),
         weight: 1.2,

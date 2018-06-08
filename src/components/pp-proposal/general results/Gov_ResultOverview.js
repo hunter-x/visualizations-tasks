@@ -5,7 +5,16 @@ import Nav from '../../shared/Nav';
 import TadeemMap from './TadeemMap';
 export default class Gov_ResultOverview extends Component {
 
-
+  constructor(props) {
+    super(props);
+    this.state={}
+  }
+  
+  componentWillMount() {
+    //get the name of the gov- start reading from position 13 after /mun-results/
+    console.log((this.props.location.pathname).substring(13));
+  }
+  
   componentDidMount() {
     (function () {
       var $body = document.body
@@ -19,9 +28,7 @@ export default class Gov_ResultOverview extends Component {
 
     }).call(this);
   }
-  handleMapClickFather(e){
-    console.log('root',e);
-  }
+
   render() {
     const TITLE = <Translate type='text' content='ppproposal.title3' />//Municipal election Turnout 2018
     return (

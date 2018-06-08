@@ -22,6 +22,7 @@ export default class PartyMap extends Component {
     }
   }
   componentWillMount() {
+    //don't know why did this cause u can use props directly ????
     if (this.state.filter == 'perVotes') {
       this.setState({ grades: this.props.grades_votes, partyName: this.props.partyName });
     } else {
@@ -42,12 +43,17 @@ export default class PartyMap extends Component {
     }
   }
 
-  getColorRegElg(d, c1, grades,state) {
+  getColorRegElg(d, c1, grades, state, AssociatedParty) {
     //if active filter is true then user has changed values in the input so we do special Style
-
+   /*  if (this.props.shapeType != 'normalShape') {
+      if (AssociatedParty != this.props.partyName) { return '#F2F2F0' }
+    } */
+//console.log(AssociatedParty);
     //if filter is "result" then we filter according to the min and max filter values
     if (this.state.activeFilter == 'result') {
-      if (d < this.state.minFilter || d > this.state.maxFilter) { return '#F2F2F0' }
+      console.log('res');
+      if (AssociatedParty != this.props.partyName) { return '#F2F2F0' }
+      else if (d < this.state.minFilter || d > this.state.maxFilter) { return '#F2F2F0' }
       else if (d > grades[2]) { return (c1[3]); }
       else if (d > grades[1]) { return (c1[2]); }
       else if (d > grades[0]) { return (c1[0]); }
@@ -56,16 +62,18 @@ export default class PartyMap extends Component {
     //if filter is "munTypeFilter"- then we only show the mun that are new|old|extended while keeping the colors of course
     else if (this.state.activeFilter == 'munTypeFilter') {
       //the state from the map matches the one chosen by the use inn the select option we diliver normal color else grey
-      if (this.state.munFilter==state) {
-        if (d > grades[2]) { return (c1[3]); }
+      if (this.state.munFilter == state) {
+        if (AssociatedParty != this.props.partyName) { return '#F2F2F0' }
+        else if (d > grades[2]) { return (c1[3]); }
         else if (d > grades[1]) { return (c1[2]); }
         else if (d > grades[0]) { return (c1[0]); }
         else { return '#F2F2F0' }
-      }else{
+      } else {
         return '#F2F2F0'
       }
-    }else  {
-      if (d > grades[2]) { return (c1[3]); }
+    } else {
+      if (AssociatedParty != this.props.partyName) { return '#F2F2F0' }
+      else if (d > grades[2]) { return (c1[3]); }
       else if (d > grades[1]) { return (c1[2]); }
       else if (d > grades[0]) { return (c1[0]); }
       else { return '#F2F2F0' }
@@ -75,13 +83,15 @@ export default class PartyMap extends Component {
 
   style(feature) {
     const property = feature.properties;
-    
+
     // if the radio button filter is per result paint the map selon a certain prop Sinon paint selon another property
     if (this.state.filter == 'perVotes') {
       let PROPERTY = parseInt(property.votes_obtenus * 100 / property.total_votes_valide);
       let STATE = property.state;
+      let  SHAPE_PARTY;
+      (property.nom_liste_fr!=undefined||property.nom_liste_fr!=null) ? SHAPE_PARTY =property.nom_liste_fr:SHAPE_PARTY='none';
       return {
-        fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.state.grades,STATE),
+        fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.state.grades, STATE, SHAPE_PARTY),
         weight: 1.2,
         opacity: 0.9,
         color: 'grey',
@@ -91,9 +101,10 @@ export default class PartyMap extends Component {
     } else if (this.state.filter == 'perSeats') {
       let PROPERTY = parseInt(property.sieges_obtenus);
       let STATE = property.state;
-
+      let  SHAPE_PARTY;
+      (property.nom_liste_fr!=undefined||property.nom_liste_fr!=null) ? SHAPE_PARTY =property.nom_liste_fr:SHAPE_PARTY='none';
       return {
-        fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.state.grades,STATE),
+        fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.state.grades, STATE, SHAPE_PARTY),
         weight: 1.2,
         opacity: 0.9,
         color: 'grey',
@@ -131,8 +142,8 @@ export default class PartyMap extends Component {
       turnout: isNaN(turnout) ? 'None' : turnout + ' %',
       blank_per: isNaN(blank_per) ? 'None' : blank_per + ' %',
       results_Percentage: isNaN(results_Percentage) ? 'None' : results_Percentage + ' %'
-      ,seats_num: (isNaN(seats_num) || seats_num == undefined) ? 'None' : seats_num,
-      state,deputy
+      , seats_num: (isNaN(seats_num) || seats_num == undefined) ? 'None' : seats_num,
+      state, deputy
     });
     return layer.setStyle({
       weight: 5,
@@ -164,19 +175,19 @@ export default class PartyMap extends Component {
   }
   //if active filter is true then user has changed values in the input and then style should be adapted accordingly 
   handleMaxFilter(e) {
-    this.setState({ maxFilter: e.target.value, activeFilter: 'result',munFilter: 'all' });
+    this.setState({ maxFilter: e.target.value, activeFilter: 'result', munFilter: 'all' });
   }
   handleMinFilter(e) {
-    this.setState({ minFilter: e.target.value, activeFilter: 'result',munFilter: 'all' });
+    this.setState({ minFilter: e.target.value, activeFilter: 'result', munFilter: 'all' });
   }
   handleMunType(e) {
     console.log(e.target.value);
     // if the filter value is all we act as the filter don't exist 
-    if (e.target.value=='all') {
-      this.setState({activeFilter:'result'});
-    }else{
-      this.setState({ munFilter: e.target.value, activeFilter: 'munTypeFilter',minFilter: 0, maxFilter: 60 });
-  }
+    if (e.target.value == 'all') {
+      this.setState({ activeFilter: 'result' });
+    } else {
+      this.setState({ munFilter: e.target.value, activeFilter: 'munTypeFilter', minFilter: 0, maxFilter: 60 });
+    }
 
   }
   render() {
@@ -187,7 +198,7 @@ export default class PartyMap extends Component {
     const SEATS_NUMBER = <Translate type='text' content='partySheet.SEATS_NUMBER' />//Seats number 
     const SEAT_RES = <Translate type='text' content='partySheet.SEAT_RES' />//Results per votes
     const VOTES_RES = <Translate type='text' content='partySheet.VOTES_RES' />//Results per seats
-    
+
     const ALL = <Translate type='text' content='partySheet.All' />//All
     const OLD = <Translate type='text' content='partySheet.Old' />//Old
     const EXTENDED = <Translate type='text' content='partySheet.extended' />//extended

@@ -12,7 +12,7 @@ export default class _RootTadeem extends Component {
     super(props);
     this.state = {
       VOTES_value: '75586 - 4,2%', CHAIRS_value: '206 - 2,8%', BEST_RES_value: '6/12 (Jemna - Kebili)', RUNNED_MUN_value: '69/350', partyName: 'Courant Democratique'
-      ,shapeToSelect:'G_TAYAR_PARTY',grades_votes:[0, 9, 20],grades_seats:[0,2,4]
+      ,shapeToSelect:'G_TAYAR_PARTY',grades_votes:[0, 9, 20],grades_seats:[0,2,4],shapeType:'normalShape'
     }
   }
 
@@ -34,9 +34,12 @@ export default class _RootTadeem extends Component {
     /* Each object in the select drawer contains values separated by **  that we parse, pass into state and then consume in the render  */
     /* grades variable contains 2 grades one for the chair results and the other for the results per votes that wee parse in the party map according to the radio button */
     const dataString = e.target.value.split("**");
+    //we check if the party is within a mixed shape to color specefically in the map
+    let shapeType='normalShape';
+    dataString[8]=='mixed'?shapeType='mixed':'normalShape';
     this.setState({
       VOTES_value: dataString[0], CHAIRS_value: dataString[1], BEST_RES_value: dataString[2], RUNNED_MUN_value: dataString[3], partyName: dataString[4]
-      ,shapeToSelect:dataString[5],grades_votes:JSON.parse(dataString[6]),grades_seats:JSON.parse(dataString[7])
+      ,shapeToSelect:dataString[5],grades_votes:JSON.parse(dataString[6]),grades_seats:JSON.parse(dataString[7]),shapeType
     });
   }
   
@@ -46,7 +49,7 @@ export default class _RootTadeem extends Component {
     const CHAIRS = <Translate type='text' content='partySheet.CHAIRS' />//Total chairs
     const BEST_RES = <Translate type='text' content='partySheet.BEST_RES' />//Highest seats number
     const RUNNED_MUN = <Translate type='text' content='partySheet.RUNNED_MUN' />//Runned municipalities
-    const { VOTES_value,CHAIRS_value,BEST_RES_value,RUNNED_MUN_value,partyName,shapeToSelect,grades_votes,grades_seats}=this.state;
+    const { VOTES_value,CHAIRS_value,BEST_RES_value,RUNNED_MUN_value,partyName,shapeToSelect,grades_votes,grades_seats,shapeType}=this.state;
     return (
       <div>
         <Nav />
@@ -65,6 +68,9 @@ export default class _RootTadeem extends Component {
                     <option value="" disabled >Select</option>
                     <option value="75586 - 4,2%**206 - 2,8%**6/12 (Jemna-Kebili)**69/350**Courant Democratique**G_TAYAR_PARTY**[0, 9, 20]**[0,2,4]**50">Courant Democratique </option>
                     <option value="19116 - 1%**93 - 1,3%**5/12 (El Hbabsa-Siliana)**43/350**Afek Tounes**G_AFEK_PARTY**[0, 7, 20]**[0,1,4]**40">Afek Tounes </option>
+                    <option value="19116 - 1%**93 - 1,3%**5/12 (El Hbabsa-Siliana)**43/350**L'Initiative**G_PARTIES_P_ONE**[0, 7, 20]**[0,1,4]**40**mixed">L'Initiative</option>
+                    <option value="19116 - 1%**93 - 1,3%**5/12 (El Hbabsa-Siliana)**43/350**Beni Watani**G_PARTIES_P_ONE**[0, 7, 20]**[0,1,4]**40**mixed">Beni Watani </option>
+                    <option value="19116 - 1%**93 - 1,3%**5/12 (El Hbabsa-Siliana)**43/350**El Binaa Al Watani**G_PARTIES_P_TWO**[0, 7, 20]**[0,1,4]**40**mixed">El Binaa Al Watani</option>
                   </FormControl>
                 </FormGroup>
               </div>
@@ -96,7 +102,7 @@ export default class _RootTadeem extends Component {
                 </div>
               </div>
             </div>
-            <PartyMap shapeToSelect={shapeToSelect} grades_votes={grades_votes} grades_seats={grades_seats} partyName={partyName}/>
+            <PartyMap shapeToSelect={shapeToSelect} grades_votes={grades_votes} grades_seats={grades_seats} partyName={partyName} shapeType={shapeType}/>
           </section>
 
         </div>

@@ -14,22 +14,59 @@ export default class MunTurnoutMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shapeIsLoaded: true, shape: config.initShape, key: 1,
+      shapeIsLoaded: false, shape: config.initShape,shape_gov: config.initShape, key: 1,
       filter: 'govLevel', checked: [true, false],
       grades: [0, 34, 38], keyTitle: 'Turnout Percentage',
       nom: '', total_votes: '', allreg_sum: '', turnout: '',
       dataName:'G_munElec_gov'
     }
   }
-
+  componentWillMount() {
+    let qString = `${config.apiUrl}/api/shape/mun_munelection_valid_blank_reg`;
+    axios({
+      method: 'get',
+      url: qString,
+      headers: {
+        'name': 'Isie',
+        'password': 'Isie@ndDi',
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+  
+    })
+      .then(response => {
+        this.setState({ shape_mun: JSON.parse(response.data.data), shapeIsLoaded: true });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      let qString2 = `${config.apiUrl}/api/shape/gov_munelection_valid_blank_reg`;
+      axios({
+        method: 'get',
+        url: qString2,
+        headers: {
+          'name': 'Isie',
+          'password': 'Isie@ndDi',
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+    
+      })
+        .then(response => {
+          this.setState({ shape:JSON.parse(response.data.data),shape_gov: JSON.parse(response.data.data), shapeIsLoaded: true });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  }
   handleRadioFilter(filter, e) {
     let checked = [false, false];
     checked[parseInt(e.target.value)] = true;
 
     if (filter == 'govLevel') {
-      this.setState({dataName:'G_munElec_gov',grades:[0, 34, 38],filter,checked});
+      this.setState({shape:this.state.shape_gov ,grades:[0, 34, 38],filter,checked});
     } else if (filter == 'munLevel') {
-      this.setState({dataName:'G_munElec_mun',grades:[0, 34, 38],filter,checked});
+      this.setState({shape:this.state.shape_mun,grades:[0, 34, 38],filter,checked});
     } 
   }
 
@@ -131,7 +168,7 @@ export default class MunTurnoutMap extends Component {
 
           <GeoJSON
             key={"a" + this.state.filter}
-            data={window[this.state.dataName]}
+            data={this.state.shape}
             style={this.style.bind(this)}
             onEachFeature={
               (feature, layer) => {
@@ -153,7 +190,7 @@ export default class MunTurnoutMap extends Component {
 
           <GeoJSON
             key={"b" + this.state.filter}
-            data={G_munElec_gov}
+            data={this.state.shape_gov}
             style={this.styleGovLimiter.bind(this)}
            
           />

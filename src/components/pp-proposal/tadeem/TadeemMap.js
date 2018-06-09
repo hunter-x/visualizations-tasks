@@ -13,13 +13,32 @@ export default class TadeemMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shapeIsLoaded: true, shape: config.initShape, key: 1,
+      shapeIsLoaded: false, shape: config.initShape, key: 1,
       filter: 'govLevel', checked: [true, false],
       grades: [0, 34, 38], keyTitle: 'Turnout Percentage',
       nom: '', blank: '', nulled: '', turnout: '',
     }
   }
-
+  componentWillMount() {
+    let qString = `${config.apiUrl}/api/shape/mun_tadeem_election`;
+    axios({
+      method: 'get',
+      url: qString,
+      headers: {
+        'name': 'Isie',
+        'password': 'Isie@ndDi',
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+  
+    })
+      .then(response => {
+        this.setState({ shape: JSON.parse(response.data.data), shapeIsLoaded: true });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   getColorRegElg(d, c1) {
     //console.log(d, c1, grades);
     if (d == 'yes') { return (c1[0]); }
@@ -89,7 +108,7 @@ export default class TadeemMap extends Component {
 
           <GeoJSON
             key={"a" + this.state.filter}
-            data={G_Tadeem}
+            data={this.state.shape}
             style={this.style.bind(this)}
             onEachFeature={
               (feature, layer) => {

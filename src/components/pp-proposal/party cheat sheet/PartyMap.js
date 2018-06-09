@@ -14,16 +14,35 @@ export default class PartyMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shapeIsLoaded: true, shape: config.initShape, key: 1,
+      shapeIsLoaded: false, shape: config.initShape, key: 1,
       filter: 'perVotes', checked: [true, false],
       keyTitle: 'Results per votes percentage', partyName: 'Ennahdha',
       nom: '', results_Percentage: '', turnout: '', blank_per: '', deputy: '', seats_num: '',
-      percentageSign: ' %', maxFilter: 60, minFilter: 0, munFilter: 'all', activeFilter: 'none',grades:[]
+      percentageSign: ' %', maxFilter: 60, minFilter: 0, munFilter: 'all', activeFilter: 'none', grades: []
     }
   }
   componentWillMount() {
-    console.log('WIL MOUNT');
-    //don't know why did this cause u can use props directly ????
+    let qString = `${config.apiUrl}/api/shape/mun_${this.props.shapeToSelect}_election_res`;
+      console.log(qString);
+      axios({
+        method: 'get',
+        url: qString,
+        headers: {
+          'name': 'Isie',
+          'password': 'Isie@ndDi',
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+
+      })
+        .then(response => {
+          console.log(response);
+          this.setState({ shape: JSON.parse(response.data.data), shapeIsLoaded: true });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    //don't know why did this cause u can use props directly ????- it's a sort of initialization
     if (this.state.filter == 'perVotes') {
       this.setState({ grades: this.props.grades_votes, partyName: this.props.partyName });
     } else {
@@ -38,15 +57,38 @@ export default class PartyMap extends Component {
     if (nextProps.partyName != this.state.partyName) {
       console.log('nnnnextProps.grades_votes', nextProps.grades_votes);
       this.setState({
-        partyName: nextProps.partyName, keyTitle: this.state.keyTitle, keyTitle: 'Results per votes percentage',filter:'perVotes',
-        grades: nextProps.grades_votes, checked: [true, false], minFilter: 0, maxFilter: 60, munFilter: 'all', activeFilter: 'none'
+        partyName: nextProps.partyName, keyTitle: this.state.keyTitle, keyTitle: 'Results per votes percentage', filter: 'perVotes',
+        grades: nextProps.grades_votes, checked: [true, false], minFilter: 0, maxFilter: 60, munFilter: 'all', activeFilter: 'none',
+        shapeIsLoaded: false
       });
     }
+
+    let qString = `${config.apiUrl}/api/shape/mun_${nextProps.shapeToSelect}_election_res`;
+    console.log(qString);
+    axios({
+      method: 'get',
+      url: qString,
+      headers: {
+        'name': 'Isie',
+        'password': 'Isie@ndDi',
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+
+    })
+      .then(response => {
+        console.log(response.data);
+        this.setState({ shape: JSON.parse(response.data.data), shapeIsLoaded: true });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    
   }
 
   getColorRegElg(d, c1, grades, state, AssociatedParty) {
     //if active filter is true then user has changed values in the input so we do special Style
- 
+
     //if filter is "result" then we filter according to the min and max filter values
     if (this.state.activeFilter == 'result') {
       if (AssociatedParty != this.props.partyName) { return '#F2F2F0' }
@@ -70,10 +112,10 @@ export default class PartyMap extends Component {
       }
     } else {
       //console.log(AssociatedParty,' || ',this.props.partyName);
-      if (this.props.partyName!=AssociatedParty) {
+      if (this.props.partyName != AssociatedParty) {
         return '#F2F2F0'
       }
-     
+
       else if (d > grades[2]) { return (c1[3]); }
       else if (d > grades[1]) { return (c1[2]); }
       else if (d > grades[0]) { return (c1[0]); }
@@ -89,8 +131,8 @@ export default class PartyMap extends Component {
     if (this.state.filter == 'perVotes') {
       let PROPERTY = parseInt(property.votes_obtenus * 100 / property.total_votes_valide);
       let STATE = property.state;
-      let  SHAPE_PARTY;
-      (property.nom_liste_fr==undefined) ? SHAPE_PARTY = this.props.partyName:SHAPE_PARTY=property.nom_liste_fr;
+      let SHAPE_PARTY;
+      (property.nom_liste_fr == undefined) ? SHAPE_PARTY = this.props.partyName : SHAPE_PARTY = property.nom_liste_fr;
       return {
         fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.state.grades, STATE, SHAPE_PARTY),
         weight: 1.2,
@@ -102,8 +144,8 @@ export default class PartyMap extends Component {
     } else if (this.state.filter == 'perSeats') {
       let PROPERTY = parseInt(property.sieges_obtenus);
       let STATE = property.state;
-      let  SHAPE_PARTY;
-      (property.nom_liste_fr==undefined) ? SHAPE_PARTY = this.props.partyName:SHAPE_PARTY=property.nom_liste_fr;
+      let SHAPE_PARTY;
+      (property.nom_liste_fr == undefined) ? SHAPE_PARTY = this.props.partyName : SHAPE_PARTY = property.nom_liste_fr;
       return {
         fillColor: this.getColorRegElg(PROPERTY, ["#ffff9c", "#c2e699", "#78c679", "#238443"], this.state.grades, STATE, SHAPE_PARTY),
         weight: 1.2,
@@ -220,8 +262,8 @@ export default class PartyMap extends Component {
           />
 
           <GeoJSON
-            key={this.props.shapeToSelect+this.props.grades}
-            data={window[this.props.shapeToSelect]}
+            key={this.props.shapeToSelect + this.props.grades}
+            data={this.state.shape}
             style={this.style.bind(this)}
             onEachFeature={
               (feature, layer) => {

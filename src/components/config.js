@@ -2,7 +2,7 @@ module.exports = {
 
 	'apiUrl':'http://inscription.tunisieelection.org:8080',	
 	//'apiUrl':'http://localhost:3000',
-	'crowdUrl':'http://localhost:3100',
+	//'crowdUrl':'http://localhost:3100',
 	'initShape':{
 		'type': 'FeatureCollection',
 		'crs': { 'type': 'name', 'properties': { 'name': 'urn:ogc:def:crs:OGC:1.3:CRS84' } },

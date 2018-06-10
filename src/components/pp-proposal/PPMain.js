@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Translate from 'react-translate-component';
 import Menu from '../shared/Menu';
 import Card from '../shared/Card';
-import counterpart  from 'counterpart';
+import counterpart from 'counterpart';
 
 export default class PPMain extends Component {
 
@@ -27,20 +27,20 @@ export default class PPMain extends Component {
 
     return (
       <section>
-        <Menu/>
+        <Menu />
         <div className="site-content">
           <h1 className="site-content__headline">{TITLE}</h1>
         </div>
 
         <div className='container topTitle' >
           <div className='row col-md-12'  >
-          <Card img="partySheet.jpg" redirectLink="/party-sheet" title={TITLECARD4} description={DESC_CARD4} />
-          {/* <Card img="partySheet.jpg" redirectLink="/mun-results" title={TITLECARD5} description={DESC_CARD5} /> */}
-          <Card img="munturnout18.jpg" redirectLink="/municipal-turnout18" title={TITLECARD1} description={DESC_CARD1} />
-          <Card img="csoNumbert18.jpg" redirectLink="/cso-stat" title={TITLECARD2} description={DESC_CARD2} />
-          <Card img="tadeem.jpg" redirectLink="/tadeem" title={TITLECARD3} description={DESC_CARD3} />
+            <Card img="partySheet.jpg" redirectLink="/party-sheet" title={TITLECARD4} description={DESC_CARD4} />
+            <Card img="partySheet.jpg" redirectLink="/mun-results" title={TITLECARD5} description={DESC_CARD5} />
+            <Card img="munturnout18.jpg" redirectLink="/municipal-turnout18" title={TITLECARD1} description={DESC_CARD1} />
+            <Card img="csoNumbert18.jpg" redirectLink="/cso-stat" title={TITLECARD2} description={DESC_CARD2} />
+            <Card img="tadeem.jpg" redirectLink="/tadeem" title={TITLECARD3} description={DESC_CARD3} />
           </div>
-          
+
         </div>
       </section>
     );

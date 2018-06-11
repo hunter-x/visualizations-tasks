@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Translate from 'react-translate-component';
 import Menu from '../../shared/Menu';
 import Nav from '../../shared/Nav';
-import TadeemMap from './TadeemMap';
+import SelectionMap from './SelectionMap';
 //if we use Redirect the browsing history will be deleted but push history keeps track of history when cllicking back button
 /*import { Redirect  } from 'react-router-dom'; <Redirect  to={this.state.redirect} /> */ 
 
@@ -45,7 +45,7 @@ export default class _RootResultsOverview extends Component {
               <h4 className="subheaderTitle "> You can click on the governorate of which you want discover results :</h4>
 
             </div>
-            <TadeemMap handleMapClickFather={this.handleMapClickFather.bind(this)} />
+            <SelectionMap handleMapClickFather={this.handleMapClickFather.bind(this)} />
           </div>
           </div>
       

@@ -5,18 +5,40 @@ import Translate from 'react-translate-component';
 import counterpart from 'counterpart';
 import MapKey from './MapKey';
 import SideMenu from './SideMenu';
+import axios from 'axios';
+import config from '../../config'
+import ReactLoading from 'react-loading';
 
 export default class CsoMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
       COLOR_SET: ["#ffffb2", "#fecc5c", "#fd8d3c", "#e31a1c"], GRADES: [500, 900, 1200], COLOR_FUNC: this.getColor,
-      NGO_TYPE_FILTER: 'sum', ALL_NGO_NUM: 20954
+      NGO_TYPE_FILTER: 'sum', ALL_NGO_NUM: 20954,shapeIsLoaded: false, shape: config.initShape, key: 1,
     }
-
   }
 
   componentWillMount() {
+    let qString = `${config.apiUrl}/api/shape/gov_cso_number_26-05`;
+    console.log(qString);
+    axios({
+      method: 'get',
+      url: qString,
+      headers: {
+        'name': 'Isie',
+        'password': 'Isie@ndDi',
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+  
+    })
+      .then(response => {
+        console.log(response.data);
+        this.setState({ shape: JSON.parse(response.data.data), shapeIsLoaded: true });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     //defining the name of the map key from the Language file en
     this.setState({ keyTitle: counterpart.translate('csoMap.MapTitle') });
   }
@@ -89,14 +111,14 @@ export default class CsoMap extends Component {
     const tooltipPercentage = <Translate type="text" content="csoMap.tooltipPercentage" />//of NGOs
     const mapKeySubtitle = <Translate type="text" content="csoMap.mapTime" />//'data collected 28-11-18',
     const MapTitle = <Translate type="text" content="csoMap.MapTitle" />//'data collected 28-11-18',
-    const HOVER = <Translate type='text' content='map.hover' />//Hover Over the map for more info
 
+    const HOVER = <Translate type='text' content='map.hover' />//Hover Over the map for more info
+    const LOADING = <Translate type='text' content='map.loading' />//Loading Map
 
     return (
       <div style={{marginTop:'3vh'}}>
        
-        <div>
-        <Map maxZoom={9} center={[34.79, 8.18]} scrollWheelZoom={false} zoom={7} minZoom={5} style={{ height: "95vh", width: "90vw", position: "relative", backgroundColor: "white" }}>
+        {this.state.shapeIsLoaded ?<Map maxZoom={9} center={[34.79, 8.18]} scrollWheelZoom={false} zoom={7} minZoom={5} style={{ height: "95vh", width: "90vw", position: "relative", backgroundColor: "white" }}>
         <TileLayer
           url='https://api.mapbox.com/styles/v1/hunter-x/cixhpey8700q12pnwg584603g/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA'
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> '
@@ -104,7 +126,7 @@ export default class CsoMap extends Component {
 
             <GeoJSON
               key={"a" + this.state.key}
-              data={G_CSO_NUMBER}
+              data={this.state.shape}
               style={this.style.bind(this)}
               onEachFeature={
                 (feature, layer) => {
@@ -138,8 +160,17 @@ export default class CsoMap extends Component {
             <SideMenu getMapType={this.getMapType.bind(this)} />
 
             </Control>
-          </Map>
-        </div>
+          </Map>:
+          <div>
+            <div className="col-md-5"></div>
+            <div className="col-md-5" style={{ marginTop: "20vh" }}>
+              <h2>{LOADING}</h2>
+              <div style={{ marginLeft: "70px" }}>
+                <ReactLoading type="bars" color="#444" className="react-Loader" delay={0} />
+              </div>
+            </div>
+          </div>
+        }
       </div>
     );
   }

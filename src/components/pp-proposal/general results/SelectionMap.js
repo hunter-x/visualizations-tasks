@@ -7,6 +7,7 @@ import MapKey from './MapKey';
 import axios from 'axios';
 import config from '../../config'
 import ReactLoading from 'react-loading';
+import SideMenu from '../cso/SideMenu';
 
 export default class SelectionMap extends Component {
   constructor(props) {
@@ -122,7 +123,7 @@ export default class SelectionMap extends Component {
     return (
       <div style={{marginTop:'3vh'}}>
        
-        {this.state.shapeIsLoaded ?<Map maxZoom={9} center={[34.79, 9.5]} scrollWheelZoom={false} zoom={7} minZoom={5} style={{ height: "95vh", width: "90vw", position: "relative", backgroundColor: "white" }}>
+        {this.state.shapeIsLoaded ?<Map maxZoom={9} center={[34.79, 9.0]} scrollWheelZoom={false} zoom={7} minZoom={5} style={{ height: "95vh", width: "90vw", position: "relative", backgroundColor: "white" }}>
         <TileLayer
           url='https://api.mapbox.com/styles/v1/hunter-x/cixhpey8700q12pnwg584603g/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA'
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> '
@@ -162,10 +163,10 @@ export default class SelectionMap extends Component {
               <MapKey colorSet={this.state.COLOR_SET} grades={this.state.GRADES} getColor={this.state.COLOR_FUNC} keyTitle={this.state.keyTitle} keySubtitle={mapKeySubtitle} />
             </Control>
 
-            {/* <Control position="topright" >
+             <Control position="topright" >
             <SideMenu getMapType={this.getMapType.bind(this)} />
 
-            </Control> */}
+            </Control> 
           </Map>:
           <div>
             <div className="col-md-5"></div>

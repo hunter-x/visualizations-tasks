@@ -29,7 +29,7 @@ export default class _RootResultsOverview extends Component {
     this.setState({ redirect: '/mun-results/'+Gov_name });
   }
   render() {
-    const TITLE = <Translate type='text' content='ppproposal.title3' />//Municipal election Turnout 2018
+    const TITLE = <Translate type='text' content='ppproposal.title2' />//Municipal election Turnout 2018
     return (
       <section >
         {this.state.redirect == 'none' ?

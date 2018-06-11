@@ -46,7 +46,6 @@ export default class Gov_ResultOverview extends Component {
     this.setState({ data: SORTED_ARRAY, mun_name: chosenGov });
   }
 
-
   render() {
     const TITLE = <Translate type='text' content='mun_res_box.title' />//...Governorate result
 
@@ -71,7 +70,13 @@ export default class Gov_ResultOverview extends Component {
               />
             )
           }
-
+        </div>
+        <div className='col-md-3 article'>
+        <div className='blog-item' style = {{position:'fixed', width:'20%', textAlign:'center'}}>
+        <div className='text-margin-top'><h4 style={{ display: 'inline' }} >number of Municipalities:</h4>  <h4  className="subheaderTitle inline"> {(this.state.data).length} </h4></div>
+        <div className='text-margin-top'><h4 style={{ display: 'inline' }} >Filter:</h4>  <h4  className="subheaderTitle inline"> _under_dev</h4></div>
+        </div>
+        
         </div>
 
       </div>

@@ -1,9 +1,17 @@
 module.exports = {
     mun_res_box: {
         title:' governorate results ',
-        turnout:'Turnout: ',
-        blank:'Blank: ',
-        seats_num:'Seats number: '
+        turnout:'Turnout ',
+        blank:'Blank ',
+        alphab:'Alphabetically ',
+        more:'Party lists number ', 
+        nahdha:'Nahdha wins',
+        nida:'Nidaa wins',
+        other:'Others win',
+        seats_num:'Seats number ',
+        sort:'Sort',
+        mun_number:'Number of Municipalities'
+
     },
     partySheet: {
         VOTES: 'Total Votes',

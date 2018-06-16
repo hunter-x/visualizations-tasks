@@ -27,8 +27,20 @@ export default class Gov_ResultOverview extends Component {
       RES.push(_.filter(party_res, function (o) { return o.map_names_ar == MunNameAr; }))
     }
     //sorting final RES array
-    let arrayOfMun = [], obj = {}, SORTED_ARRAY = []
+    let arrayOfMun = [], obj = {}, SORTED_ARRAY = [];let sieges_obtenus=0,listHead=''
     for (let j = 0; j < RES.length; j++) {
+      
+      //get the name of the list head
+      for (let k = 0; k < RES[j].length; k++) {
+          if (sieges_obtenus<parseInt(RES[j][k].sieges_obtenus)) {
+          sieges_obtenus=parseInt(RES[j][k].sieges_obtenus);
+          listHead=RES[j][k].nom_liste_fr;
+          console.log('--------',sieges_obtenus,listHead);
+        }        
+      }
+      sieges_obtenus=0// reinstalization for the next municipality
+
+      obj.listHead=listHead
       obj.id = j;
       obj.mun_fr = RES[j][0].mun_fr;
       obj.blanc_per = parseInt(RES[j][0].votes_blancs) * 100 / parseInt(RES[j][0].total_votes_valide).toFixed(3);
@@ -68,14 +80,20 @@ export default class Gov_ResultOverview extends Component {
       readyForSortRes.sort(compare);
     } else if (filter == 'more') {
       readyForSortRes.sort(compare_list_number);
-
     } else if (filter == 'nahdha_res') {
+      console.log('readyForSortRes',readyForSortRes);
+      console.log('initialDataArray',initialDataArray);
+      // loop through the data and delete the data that contains the
+      readyForSortRes.sort(listHeadNahdha);
 
     } else if (filter == 'nida_res') {
+      readyForSortRes.sort(listHeadNida);
 
     } else if (filter == 'other_res') {
+      readyForSortRes.sort(listHeadOther);
 
     }
+    //reconstruct sorted array
     for (let k = 0; k < readyForSortRes.length; k++) {
       SORTED_ARRAY[k] = initialDataArray[readyForSortRes[k].id]
     }
@@ -189,6 +207,27 @@ function compare_list_number(a, b) {
   if (a.party_number > b.party_number)
     return -1;
   if (a.party_number < b.party_number)
+    return 1;
+  return 0;
+}
+function listHeadNahdha(a) {
+  if (a.listHead == 'Ennahdha')
+    return -1;
+  if (a.listHead != 'Ennahdha')
+    return 1;
+  return 0;
+}
+function listHeadNida(a) {
+  if (a.listHead == 'Nidaa Tounes')
+    return -1;
+  if (a.listHead != 'Nidaa Tounes')
+    return 1;
+  return 0;
+}
+function listHeadOther(a) {
+  if ((a.listHead != 'Ennahdha')&&(a.listHead != 'Nidaa Tounes'))
+    return -1;
+  else
     return 1;
   return 0;
 }

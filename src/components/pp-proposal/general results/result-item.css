@@ -10,6 +10,11 @@
    width: 100%;
   margin-left: 1vh;
 }
+.viz-changer-button{
+  float: right;
+    margin-left: 2%;
+    margin-bottom: 2%;
+}
 div#contentBlog {
     position: fixed;
     top: -8vh;

@@ -10,7 +10,11 @@ module.exports = {
         other:'Others win',
         seats_num:'Seats number ',
         sort:'Sort',
-        mun_number:'Number of Municipalities'
+        mun_number:'Number of Municipalities',
+        barchart:'Barchart',
+        sunburst:'Sunburst',
+        whisker:'Whisker',
+
 
     },
     partySheet: {

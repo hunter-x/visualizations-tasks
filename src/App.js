@@ -12,8 +12,8 @@ import _RootMunTurnout from './components/pp-proposal/turnout/_RootMunTurnout' ;
 import _RootCsoNumber from './components/pp-proposal/cso/_RootCsoNumber' ;
 import _RootTadeem from './components/pp-proposal/tadeem/_RootTadeem' ;
 import _RootPartiesSheet from './components/pp-proposal/party cheat sheet/_RootPartiesSheet' ;
-import _RootResultsOverview from './components/pp-proposal/general results/_RootResultsOverview' ;
-import Gov_ResultOverview from './components/pp-proposal/general results/Gov_ResultOverview' ;
+import _RootMapCsoResultsOverview from './components/pp-proposal/general results/_RootMapCsoResultsOverview' ;
+import _RootGovResultOverview from './components/pp-proposal/general results/_RootGovResultOverview' ;
 
 /* Aaron */
 import OneMain from './components/one-to-one/OneMain' ;
@@ -36,8 +36,8 @@ export default class App extends Component {
       <Route exact path="/cso-stat" component={_RootCsoNumber} />
       <Route exact path="/tadeem" component={_RootTadeem} />
       <Route exact path="/party-sheet" component={_RootPartiesSheet} />
-      <Route exact path="/mun-results" component={_RootResultsOverview} />
-      <Route exact path="/mun-results/:gov" component={Gov_ResultOverview} />
+      <Route exact path="/mun-results" component={_RootMapCsoResultsOverview} />
+      <Route exact path="/mun-results/:gov" component={_RootGovResultOverview} />
 
       {/* Aaron Project */}
       <Route exact path="/one-to-one" component={OneMain} />

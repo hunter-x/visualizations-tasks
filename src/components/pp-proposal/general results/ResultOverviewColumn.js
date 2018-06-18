@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import Translate from 'react-translate-component';
 import ResultItemBar from './ResultItemBar';
+import { SSL_OP_PKCS1_CHECK_1 } from 'constants';
 
 export default class ResultOverviewColumn extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { mun_name: '', data: [], filter: 'alphab', checked: [true, false, false, false, false, false, false] }
+    this.state = { mun_name: '', data: [], filter: 'alphab', checked: [true, false, false, false, false, false, false], load: false }
   }
   //prepare the data
-  componentWillMount() {
-   
+  componentDidMount() {
+
     let RES = this.props.partyResultsOfMun;
 
     //sorting final RES array
@@ -46,7 +47,7 @@ export default class ResultOverviewColumn extends Component {
     }
     console.log(SORTED_ARRAY);
 
-    this.setState({ data: SORTED_ARRAY, readyForSortRes: arrayOfMun, initialDataArray: RES });
+    this.setState({ data: SORTED_ARRAY, readyForSortRes: arrayOfMun, initialDataArray: RES, load: true });
   }
   handleRadioFilter(filter, e) {
     console.log(e.target.value);
@@ -100,19 +101,23 @@ export default class ResultOverviewColumn extends Component {
 
     return (
       <div >
-        <div className='col-md-9'  >
-          {
-            (this.state.data).map((object, i) =>
-              <ResultItemBar
-                key={i}
-                data={this.state.data[i]}
-                mun_name={object[0].mun_fr}
-                turnout={((object[0].total_votes * 100) / object[0].total_inscrits).toFixed(2)}
-                blank={((object[0].votes_blancs * 100) / object[0].total_votes_valide).toFixed(2)}
-              />
-            )
-          }
-        </div>
+        {this.state.load == true ?
+          <div className='col-md-9'  >
+            {
+              (this.state.data).map((object, i) =>
+                <ResultItemBar
+                  key={i}
+                  data={this.state.data[i]}
+                  mun_name={object[0].mun_fr}
+                  turnout={((object[0].total_votes * 100) / object[0].total_inscrits).toFixed(2)}
+                  blank={((object[0].votes_blancs * 100) / object[0].total_votes_valide).toFixed(2)}
+                />
+              )
+            }
+          </div>
+
+          : <h1>loading</h1>}
+
         <div className='col-md-3 article'>
           <div className='blog-item' style={{ position: 'fixed' }} >
             <div className='text-margin-top '><h4 style={{ display: 'inline' }} >{NUMBER_OF_MUN}:</h4>  <h4 className="subheaderTitle inline"> {(this.state.data).length} </h4></div>

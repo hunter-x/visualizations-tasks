@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import HighchartInit from '../../shared/HighchartInit';
-import { SSL_OP_PKCS1_CHECK_1 } from 'constants';
 var _ = require('lodash');
 
 //import counterpart from 'counterpart' ;
@@ -76,42 +75,48 @@ export default class ResultOverviewSunburst extends Component {
     let newwRes = _.zip(...SeatsArray)
 
     //delete null
-    let deleted_party_ids=[]
+    let deleted_party_ids = []
+    console.log('newwRes', newwRes);
     for (let i = 0; i < newwRes.length; i++) {
-      let element=newwRes[i]
+      let element = newwRes[i]
       for (let j = 0; j < element.length; j++) {
-        if (element[j]!==null) {
+        if (element[j] !== null) {
           break;
-        }else{
-          if (j==element.length -1) {
+        } else {
+          if (j == element.length - 1) {
             //element.splice(j, 1);
-            //newwRes.splice(i, 1);
+            newwRes.splice(i, 1);
             deleted_party_ids.push(i)
           }
         }
       }
     }
-    console.log('newwRes',deleted_party_ids);
+    console.log('newwRes', newwRes);
 
-    let seriesArr = [], seriesObj = {}
-    for (let i = 0; i < newwRes.length; i++) {
-      seriesObj.name = PARTY_LIST[i];
-        if (PARTY_LIST[i] == 'Ennahdha') {
-          seriesObj.color = 'blue'
-        } else if (PARTY_LIST[i] == 'Nidaa Tounes') {
-          seriesObj.color = 'red'
-        } else if (PARTY_LIST[i] == 'Courant Démocrate') {
-          seriesObj.color = 'orange'
-        }
-        seriesObj.data = newwRes[i]
-        seriesArr.push(seriesObj);
-        seriesObj = {}
-    }
+    console.log('deleted_party_ids', deleted_party_ids);
+    //delete unused partiees
+    console.log('PARTY_LIST',PARTY_LIST);
+
     for (let i = 0; i < deleted_party_ids.length; i++) {
-      seriesArr.splice(deleted_party_ids[i], 1);
+      console.log('deleted_party_ids[i]',deleted_party_ids[i]);
+      PARTY_LIST.splice(deleted_party_ids[i], 1);
     }
-
-    console.log('seriesArr',seriesArr);
+    console.log('PARTY_LIST',PARTY_LIST);
+    let seriesArr = [], seriesObj = {}
+    for (let i = 0; i < PARTY_LIST.length; i++) {
+      seriesObj.name = PARTY_LIST[i];
+      if (PARTY_LIST[i] == 'Ennahdha') {
+        seriesObj.color = 'blue'
+      } else if (PARTY_LIST[i] == 'Nidaa Tounes') {
+        seriesObj.color = 'red'
+      } else if (PARTY_LIST[i] == 'Courant Démocrate') {
+        seriesObj.color = 'orange'
+      }
+      seriesObj.data = newwRes[i]
+      seriesArr.push(seriesObj);
+      seriesObj = {}
+    }
+ 
 
     this.setState({
 

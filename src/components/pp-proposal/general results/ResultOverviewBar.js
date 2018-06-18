@@ -40,14 +40,14 @@ export default class ResultOverviewSunburst extends Component {
       arrayOfMun.push(obj);
       obj = {}
     }
-    console.log('res', RES);
+    //console.log('res', RES);
     /*  ArrayIndex=_.sortBy(arrayOfMun, [function(o) { return o.mun; }]); */
     arrayOfMun.sort(compare);
     //reconstruct sorted array
     for (let k = 0; k < arrayOfMun.length; k++) {
       SORTED_ARRAY[k] = RES[arrayOfMun[k].id]
     }
-    console.log('SORTED_ARRAY', SORTED_ARRAY);
+    //console.log('SORTED_ARRAY', SORTED_ARRAY);
     //prepare data fr categories
     for (let i = 0; i < SORTED_ARRAY.length; i++) {
       categories.push(SORTED_ARRAY[i][0].mun_fr)
@@ -74,20 +74,44 @@ export default class ResultOverviewSunburst extends Component {
 
     }
     let newwRes = _.zip(...SeatsArray)
-    let seriesArr = [], seriesObj = {}
-    for (let i = 0; i < PARTY_LIST.length; i++) {
-      seriesObj.name = PARTY_LIST[i];
-      if (PARTY_LIST[i] == 'Ennahdha') {
-        seriesObj.color = 'blue'
-      } else if (PARTY_LIST[i] == 'Nidaa Tounes') {
-        seriesObj.color = 'red'
-      } else if (PARTY_LIST[i] == 'Courant Démocrate') {
-        seriesObj.color = 'orange'
+
+    //delete null
+    let deleted_party_ids=[]
+    for (let i = 0; i < newwRes.length; i++) {
+      let element=newwRes[i]
+      for (let j = 0; j < element.length; j++) {
+        if (element[j]!==null) {
+          break;
+        }else{
+          if (j==element.length -1) {
+            //element.splice(j, 1);
+            //newwRes.splice(i, 1);
+            deleted_party_ids.push(i)
+          }
+        }
       }
-      seriesObj.data = newwRes[i]
-      seriesArr.push(seriesObj);
-      seriesObj = {}
     }
+    console.log('newwRes',deleted_party_ids);
+
+    let seriesArr = [], seriesObj = {}
+    for (let i = 0; i < newwRes.length; i++) {
+      seriesObj.name = PARTY_LIST[i];
+        if (PARTY_LIST[i] == 'Ennahdha') {
+          seriesObj.color = 'blue'
+        } else if (PARTY_LIST[i] == 'Nidaa Tounes') {
+          seriesObj.color = 'red'
+        } else if (PARTY_LIST[i] == 'Courant Démocrate') {
+          seriesObj.color = 'orange'
+        }
+        seriesObj.data = newwRes[i]
+        seriesArr.push(seriesObj);
+        seriesObj = {}
+    }
+    for (let i = 0; i < deleted_party_ids.length; i++) {
+      seriesArr.splice(deleted_party_ids[i], 1);
+    }
+
+    console.log('seriesArr',seriesArr);
 
     this.setState({
 

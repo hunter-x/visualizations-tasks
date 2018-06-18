@@ -26,7 +26,7 @@ export default class ResultOverviewSunburst extends Component {
                 chart: {
                     height: '65%'
                 },
-
+                credits:false,
                 title: {
                     text: ''
                 },

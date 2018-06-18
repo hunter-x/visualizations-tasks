@@ -44,7 +44,9 @@ module.exports = {
         mapTime: 'data collected 26-05-18',
         MapTitle: 'CSOs Number',
         searchFilter: 'Search Filter',
-        ngoType: 'Ngo Type'
+        ngoType: 'Ngo Type',
+        csoMunRes: 'Cso and results',
+        CsoMap: 'CSOs Map'
 
     },
     nav: {

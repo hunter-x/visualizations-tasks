@@ -14,6 +14,7 @@
   float: right;
     margin-left: 2%;
     margin-bottom: 2%;
+    text-transform: initial;
 }
 div#contentBlog {
     position: fixed;

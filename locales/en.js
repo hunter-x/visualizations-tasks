@@ -14,6 +14,7 @@ module.exports = {
         barchart:'Barchart',
         sunburst:'Sunburst',
         whisker:'Whisker',
+        column:'Column Chart',
 
 
     },

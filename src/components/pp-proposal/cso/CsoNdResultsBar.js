@@ -9,6 +9,7 @@ export default class CsoNdResultsBar extends Component {
                 chart: {
                     height: '50%'
                 },
+                credits:false,
                 title: {
                     text: 'Party results & CSO number per Governorate'
                 },

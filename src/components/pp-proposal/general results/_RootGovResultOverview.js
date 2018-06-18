@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ResultOverviewColumn from './ResultOverviewColumn';
 import ResultOverviewBar from './ResultOverviewBar';
 import ResultOverviewSunburst from './ResultOverviewSunburst';
 import { Link } from 'react-router-dom';
@@ -36,6 +37,7 @@ export default class _RootGovResultOverview extends Component {
     }
     render() {
         const TITLE = <Translate type='text' content='mun_res_box.title' />//Governorate result
+        const COLUMN = <Translate type='text' content='mun_res_box.column' />//columnchart
         const BARCHART = <Translate type='text' content='mun_res_box.barchart' />//barchart
         const SUNBURST = <Translate type='text' content='mun_res_box.sunburst' />//sunburst
         const WHISKER = <Translate type='text' content='mun_res_box.whisker' />//whisker
@@ -53,33 +55,35 @@ export default class _RootGovResultOverview extends Component {
                 {/* toggle between viz buttons */}
                 <div className='col-md-9  col-xs-12 '>
                     <RaisedButton
-                        label={BARCHART}
+                        label={COLUMN}
                         className='viz-changer-button'
                         primary={this.state.activeButton[0]}
                         onClick={this.vizTypeChangeHandler.bind(this, 0)}
                         icon={<FontIcon className="fas fa-chart-bar" color='#000000' />}
                     />
+
                     <RaisedButton
-                        label={SUNBURST}
+                        label={BARCHART}
                         className='viz-changer-button'
                         primary={this.state.activeButton[1]}
                         onClick={this.vizTypeChangeHandler.bind(this, 1)}
-                        icon={<FontIcon className="fas fa-chart-pie" />}
+                        icon={<FontIcon className="fas fa-bars" color='#000000' />}
                     />
-
                     <RaisedButton
-                        label={WHISKER}
-                        className='viz-changer-button'
-                        primary={this.state.activeButton[2]}
-                        onClick={this.vizTypeChangeHandler.bind(this, 2)}
-                        icon={<FontIcon className="far fa-images" color='#000000' />}
-                    />
+                    label={SUNBURST}
+                    className='viz-changer-button'
+                    primary={this.state.activeButton[2]}
+                    onClick={this.vizTypeChangeHandler.bind(this, 2)}
+                    icon={<FontIcon className="fas fa-chart-pie" />}
+                />
                 </div>
                 {this.state.activeButton[0] ?
-                    <ResultOverviewBar  partyResultsOfMun={this.state.partyResultsOfMun} />
+                    <ResultOverviewColumn  partyResultsOfMun={this.state.partyResultsOfMun} />
                     : this.state.activeButton[1] ?
+                        <ResultOverviewBar govName={this.state.mun_name} partyResultsOfMun={this.state.partyResultsOfMun} />
+                        : this.state.activeButton[2] ?
                         <ResultOverviewSunburst govName={this.state.mun_name} partyResultsOfMun={this.state.partyResultsOfMun} />
-                        : null
+                        :null
                 }
             </div>
         );
